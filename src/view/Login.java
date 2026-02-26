@@ -22,7 +22,7 @@ public class Login extends JPanel {
 	 * Create the panel.
 	 */
 	public Login() {
-		setBackground(new Color(175, 238, 238));
+		setBackground(new Color(211, 211, 211));
 		setLayout(new MigLayout("", "[30.00,grow][][166.00][30.00,grow]", "[30.00,grow][][][][][][][][][][34.00][grow]"));
 		
 		JLabel lbNome = new JLabel("Nome");
@@ -53,22 +53,22 @@ public class Login extends JPanel {
 		tfCpf.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(175, 238, 238));
+		panel_3.setBackground(new Color(211, 211, 211));
 		add(panel_3, "cell 1 10,alignx left,growy");
 		
 		JButton btNaoTenhoConta = new JButton("Não tenho conta");
-		btNaoTenhoConta.setForeground(new Color(16, 90, 95));
-		btNaoTenhoConta.setBackground(new Color(175, 238, 238));
+		btNaoTenhoConta.setForeground(new Color(178, 34, 34));
+		btNaoTenhoConta.setBackground(new Color(211, 211, 211));
 		btNaoTenhoConta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btNaoTenhoConta.setBorderPainted(false);
 		panel_3.add(btNaoTenhoConta);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(175, 238, 238));
+		panel.setBackground(new Color(178, 34, 34));
 		add(panel, "cell 2 10,alignx right,aligny center");
 		
 		JButton btEntrar = new JButton("Entrar");
-		btEntrar.setBackground(new Color(64, 128, 128));
+		btEntrar.setBackground(new Color(178, 34, 34));
 		btEntrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		panel.add(btEntrar);
 		btEntrar.setBorderPainted(false);;
