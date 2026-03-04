@@ -16,7 +16,7 @@ public class CadastroUsuario extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNome;
 	private JTextField tfUsuario;
-	private JTextField textField;
+	private JTextField tfCpf;
 
 	/**
 	 * Create the panel.
@@ -51,10 +51,10 @@ public class CadastroUsuario extends JPanel {
 		lbCpf.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		add(lbCpf, "cell 1 5,alignx left");
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
-		textField.setColumns(10);
-		add(textField, "cell 2 5,growx");
+		tfCpf = new JTextField();
+		tfCpf.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+		tfCpf.setColumns(10);
+		add(tfCpf, "cell 2 5,growx");
 		
 		
 		
