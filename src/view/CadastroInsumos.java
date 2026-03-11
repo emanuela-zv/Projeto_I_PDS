@@ -17,13 +17,14 @@ public class CadastroInsumos extends JPanel {
 	private JTextField tfFornecedora;
 	private JTextField tfCodigoBarras;
 	private JTextField tfQuantidade;
+	private JTextField tfValor;
 
 	/**
 	 * Create the panel.
 	 */
 	public CadastroInsumos() {
 		setBackground(new Color(211, 211, 211));
-		setLayout(new MigLayout("", "[grow][][306.00,grow][grow]", "[grow][][][][][][][][grow][][grow]"));
+		setLayout(new MigLayout("", "[grow][][306.00,grow][grow]", "[grow][][][][][][][][][grow][][grow]"));
 		
 		JLabel lbCadastroProdutos = new JLabel("Cadastro de Produtos");
 		lbCadastroProdutos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 26));
@@ -74,17 +75,26 @@ public class CadastroInsumos extends JPanel {
 		tfQuantidade.setColumns(10);
 		add(tfQuantidade, "cell 2 7,growx");
 		
+		JLabel lbValor = new JLabel("Valor (da unidade)");
+		lbValor.setFont(new Font("Dialog", Font.PLAIN, 22));
+		add(lbValor, "cell 1 8,alignx trailing");
+		
+		tfValor = new JTextField();
+		tfValor.setFont(new Font("Dialog", Font.PLAIN, 20));
+		tfValor.setColumns(10);
+		add(tfValor, "cell 2 8,growx");
+		
 		JLabel lbDescricao = new JLabel("Descrição");
 		lbDescricao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
-		add(lbDescricao, "cell 1 8");
+		add(lbDescricao, "cell 1 9");
 		
 		JTextPane tpDescricao = new JTextPane();
 		tpDescricao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
-		add(tpDescricao, "cell 2 8,grow");
+		add(tpDescricao, "cell 2 9,grow");
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(178, 34, 34));
-		add(panel_1, "cell 1 9,grow");
+		add(panel_1, "cell 1 10,grow");
 		
 		JButton btVoltar = new JButton("Voltar");
 		btVoltar.setBackground(new Color(178, 34, 34));
@@ -94,7 +104,7 @@ public class CadastroInsumos extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(178, 34, 34));
-		add(panel, "cell 2 9,grow");
+		add(panel, "cell 2 10,grow");
 		
 		JButton btCadastrar = new JButton("Cadastrar");
 		btCadastrar.setBackground(new Color(178, 34, 34));
