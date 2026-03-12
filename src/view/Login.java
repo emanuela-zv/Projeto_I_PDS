@@ -17,6 +17,7 @@ public class Login extends JPanel {
 	private JTextField tfNome;
 	private JTextField tfUsuario;
 	private JTextField tfCpf;
+	private JButton btEntrar;
 
 	/**
 	 * Create the panel.
@@ -67,12 +68,20 @@ public class Login extends JPanel {
 		panel.setBackground(new Color(178, 34, 34));
 		add(panel, "cell 2 10,alignx right,aligny center");
 		
-		JButton btEntrar = new JButton("Entrar");
+		btEntrar = new JButton("Entrar");
+
 		btEntrar.setBackground(new Color(178, 34, 34));
 		btEntrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		panel.add(btEntrar);
 		btEntrar.setBorderPainted(false);;
-
+		
+	}
+	
+	public void btEntrar(ActionListener actionListener) {
+		this.btEntrar.addActionListener(actionListener);
 	}
 
 }
+
+
+
