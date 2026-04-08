@@ -12,6 +12,7 @@ public class Navegador {
 	private Login login;
 	private TelaPrincipal telaPrincipal;
 	
+	
 	public Navegador(Login login, TelaPrincipal telaPrincipal) {
 		super();
 		this.login = login;
@@ -22,10 +23,11 @@ public class Navegador {
 	public void adicionarPainel(String nome, JPanel tela) {
 		this.telaPrincipal.adicionarTela(nome, tela);
 	}
-	public void navegarTela(String nome) {
+	
+	public void navegar(String nome) {
 		this.telaPrincipal.mostrarTela(nome);
 	}
 	
-	//fazer os métodos adicionar tela e mostrar5 na tela principal.
+	//fazer os métodos adicionar tela e mostrar na tela principal.
 	
 }

@@ -64,6 +64,7 @@ public class Login extends JPanel {
 		btNaoTenhoConta.setBorderPainted(false);
 		panel_3.add(btNaoTenhoConta);
 		
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(178, 34, 34));
 		add(panel, "cell 2 10,alignx right,aligny center");
@@ -79,6 +80,10 @@ public class Login extends JPanel {
 	
 	public void btEntrar(ActionListener actionListener) {
 		this.btEntrar.addActionListener(actionListener);
+	}
+	
+	public void btNaoTenhoConta(ActionListener actionListener) {
+		this.btNaoTenhoConta(actionListener);
 	}
 
 }

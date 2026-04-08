@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS ´supermercado`
+
+CREATE DATABASE supermercado;
+
+USE supermercado;
+
+CREATE TABLE IF NOT EXISTS usuarios(
+cpf VARCHAR (11) PRIMARY KEY NOT NULL,
+nome VARCHAR(100) NOT NULL,
+usuario VARCHAR(100) NOT NULL UNIQUE,
+adm boolean not null
+);
+
+CREATE TABLE IF NOT EXISTS insumos(
+codigoBarras INT (50) PRIMARY KEY NOT NULL,
+nome VARCHAR (100) NOT NULL,
+marca VARCHAR (100) NOT NULL,
+fornecedora VARCHAR (100) NOT NULL,
+quantidade INT NOT NULL,
+descricao VARCHAR (500) NOT NULL,
+valor FLOAT NOT NULL
+
+);

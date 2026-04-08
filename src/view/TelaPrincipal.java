@@ -1,15 +1,20 @@
 package view;
 
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.BorderLayout;
 
 public class TelaPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private CardLayout cardlayout;
+	private String panelAtual;
+	JPanel panelTelas = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -32,20 +37,34 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 618, 493);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		this.cardlayout = new CardLayout();
+		this.panelTelas.setLayout(cardlayout);
+		
+		contentPane.add(panelTelas, BorderLayout.CENTER);
+		
 	}
 	
-//	public void adicionarTela(String nome, JPanel tela) {
-//		this.panelTelas.add(nome,tela);
-//		
-//	}
-//	public void mostrarTela(String nome) {
-//		this.cardLayout.show(this.panelTelas,nome);
-//		this.panelAtual = nome;
-//		this.pack();
-//	}
+	public String getPanelAtual() {
+		return panelAtual;
+	}
+	public void setPanelAtual(String panelAtual) {
+		this.panelAtual = panelAtual;
+	}
+	
+	public void adicionarTela(String nome, JPanel tela){
+		this.panelTelas.add(tela, nome);
+	}
+	
+	public void mostrarTela(String nome) {
+		this.cardlayout.show(this.panelTelas, nome);
+		this.panelAtual = nome;
+		this.pack();
+	}
 
 }

@@ -15,7 +15,7 @@ public class LoginController {
 	private Navegador navegador;
 	
 
-	public LoginController(Login login, Navegador navegador) {
+	public LoginController(Login login, UsuariosDAO usuariosDAO, Navegador navegador) {
 		super();
 		this.login = login;
 		this.navegador = navegador;
@@ -35,20 +35,22 @@ public class LoginController {
 		
 		for (Usuarios u: usuarios) {
 			if(u.getCpf().isEmpty()) {
-				JOptionPane.showMessageDialog("Usuário não encontrado", usuarios);
+				JOptionPane.showInputDialog("Usuário não encontrado", usuarios);
 			}
 			else {
 				if(u.isAdm()==true) {
-					this.navegador.navegarTela("CADASTROPRODUTOS");
+					this.navegador.navegar("CADASTROPRODUTOS");
 					
 				}
 				else {
-					this.navegador.navegarTela("COMPRA");
+					this.navegador.navegar("COMPRA");
 				}
 			}
 		}
 		
 	}
+	
+	
 	
 	
 	
