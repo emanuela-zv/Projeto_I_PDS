@@ -3,6 +3,7 @@ package controller;
 import model.Insumos;
 import model.InsumosDAO;
 import view.CadastroInsumos;
+import view.Produtos;
 
 public class CadastroInsumosController {
 
@@ -10,35 +11,35 @@ public class CadastroInsumosController {
 	private Navegador navegador;
 	private InsumosDAO insumosDao;
 	private Insumos novo;
+	private Produtos produtos;
+	
 
-	public CadastroInsumosController(CadastroInsumos cadastroInsumos, Navegador navegador, InsumosDAO insumosDao) {
+	public CadastroInsumosController(CadastroInsumos cadastroInsumos, Navegador navegador, InsumosDAO insumosDao, Produtos produtos) {
 		super();
 		this.cadastroInsumos = cadastroInsumos;
 		this.navegador = navegador;
 		this.insumosDao = insumosDao;
+		this.produtos = produtos;
 		
 		this.cadastroInsumos.cadastrar(e -> {
 			
             try {
             	
-                Insumos novo = new Insumos(
-                		
+                Insumos novo = new Insumos(                		
                     
                     cadastroInsumos.getTfNome().getText(),
                     cadastroInsumos.getTfMarca().getText(),
                     cadastroInsumos.getTfFornecedora().getText(),
                     cadastroInsumos.getTfDescricao().getText(),
-                    cadastroInsumos.getTfValor().getText()),
-                    cadastroInsumos.getTfQuantidade().getText(),
-                    cadastroInsumos.getTfCodigoBarras().getText()
+                    Float.parseFloat(cadastroInsumos.getTfValor().getText()),
+                    Integer.parseInt(cadastroInsumos.getTfQuantidade().getText()),
+                    Integer.parseInt(cadastroInsumos.getTfCodigoBarras().getText())
                 );
 
                
 				insumosDao.adicionarInsumo(novo);
 
-                tabelaInsumos.atualizarTabela(insumosDao.listarInsumos());
-
-                // Navegar para a tabela
+				// Navegar para a tabela
                 navegador.navegar("TABELA_INSUMOS");
 
                 // limpar campos

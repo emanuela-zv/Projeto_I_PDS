@@ -21,7 +21,9 @@ public class CadastroUsuario extends JPanel {
 	private JTextField tfCpf;
 	private JButton btVoltar;
 	private JButton btCadastrar;
-
+	private JRadioButton rbCliente;
+	private JRadioButton rbAdm;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -60,14 +62,13 @@ public class CadastroUsuario extends JPanel {
 		tfCpf.setColumns(10);
 		add(tfCpf, "cell 2 5,growx");
 		
-		
-		
-		JRadioButton rbCliente = new JRadioButton("Sou cliente");
+				
+		rbCliente = new JRadioButton("Sou cliente");
 		rbCliente.setBackground(new Color(211, 211, 211));
 		rbCliente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		add(rbCliente, "cell 1 6,alignx left");
 		
-		JRadioButton rbAdm = new JRadioButton("Sou administrador");
+		rbAdm = new JRadioButton("Sou administrador");
 		rbAdm.setBackground(new Color(211, 211, 211));
 		rbAdm.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		add(rbAdm, "cell 2 6,alignx center");
@@ -121,6 +122,22 @@ public class CadastroUsuario extends JPanel {
 		this.tfCpf = tfCpf;
 	}
 	
+	public JRadioButton getRbCliente() {
+		return rbCliente;
+	}
+
+	public void setRbCliente(JRadioButton rbCliente) {
+		this.rbCliente = rbCliente;
+	}
+
+	public JRadioButton getRbAdm() {
+		return rbAdm;
+	}
+
+	public void setRbAdm(JRadioButton rbAdm) {
+		this.rbAdm = rbAdm;
+	}
+
 	public void voltar(ActionListener actionListener) {
 		this.btVoltar.addActionListener(actionListener);
 		

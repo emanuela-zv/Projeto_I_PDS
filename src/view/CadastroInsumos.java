@@ -126,6 +126,17 @@ public class CadastroInsumos extends JPanel {
 	public void cadastrar(ActionListener actionListener) {
 		this.btCadastrar.addActionListener(actionListener);
 	}
+	
+	public void limparCampos() {
+		
+	    getTfNome().setText("");
+	    getTfMarca().setText("");
+	    getTfFornecedora().setText("");
+	    getTfDescricao().setText("");
+	    getTfValor().setText("");
+	    getTfQuantidade().setText("");
+	    getTfCodigoBarras().setText("");
+	}
 
 	public JTextField getTfNome() {
 		return tfNome;

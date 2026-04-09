@@ -32,7 +32,7 @@ public class Main {
 		UsuariosDAO usuariosDAO = new UsuariosDAO();
 				
 		LoginController loginController = new LoginController(login, usuariosDAO, navegador);
-		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastroUsuario, navegador);
+		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastroUsuario, navegador, usuariosDAO);
 		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController 
 				(navegador, cadastroInsumos,cadastroProdutos, produtos);
 		

@@ -1,12 +1,28 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class BancoDeDados {
 
-	public static Connection conectar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private static final String URL = "jdbc:mysql://localhost:3306/supermercado"; // <-- substitua '/cadastro_db' pelo seu banco de dados
+    private static final String USUARIO = "root"; // <-- Substitua pelo seu usuário
+    private static final String SENHA = "M1a2n3u4";   // <-- Substitua pela sua senha
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+
+    // Método para obter uma conexão com o banco de dados
+    public static Connection conectar() {
+        Connection conexao = null;
+        try {
+            Class.forName(DRIVER);
+            conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver JDBC não encontrado: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+        }
+        return conexao;
+    }
 
 }

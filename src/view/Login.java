@@ -87,6 +87,7 @@ public class Login extends JPanel {
 	public void semConta(ActionListener actionListener) {
 		this.btNaoTenhoConta.addActionListener(actionListener);
 	}
+	
 
 	public JTextField getTfNome() {
 		return tfNome;
@@ -112,6 +113,11 @@ public class Login extends JPanel {
 		this.tfCpf = tfCpf;
 	}
 	
+	public void limparDados(){
+		getTfNome().setText("");
+		getTfCpf().setText("");
+		getTfUsuario().setText("");		
+	}
 	
 
 }

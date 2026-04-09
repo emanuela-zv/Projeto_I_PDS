@@ -17,7 +17,7 @@ public class LoginController {
 	private String usuarioExistente;
 	
 
-	public LoginController(Login login, UsuariosDAO usuariosDAO, Navegador navegador) {
+	public LoginController(Login login, UsuariosDAO usuariosDao, Navegador navegador) {
 		super();
 		this.login = login;
 		this.usuariosDao =usuariosDao;
@@ -72,7 +72,8 @@ public class LoginController {
 			    }
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "Usuário não encontrado! \nVerfique as informações.", "Informação", 1);
+				JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos! \nVerfique as informações.", "Informação", 1);
+				
 			}
 		}
 		
