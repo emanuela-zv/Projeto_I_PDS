@@ -7,6 +7,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -16,7 +18,9 @@ public class CadastroUsuario extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfNome;
 	private JTextField tfUsuario;
-	private JTextField textField;
+	private JTextField tfCpf;
+	private JButton btVoltar;
+	private JButton btCadastrar;
 
 	/**
 	 * Create the panel.
@@ -51,10 +55,10 @@ public class CadastroUsuario extends JPanel {
 		lbCpf.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		add(lbCpf, "cell 1 5,alignx left");
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
-		textField.setColumns(10);
-		add(textField, "cell 2 5,growx");
+		tfCpf = new JTextField();
+		tfCpf.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+		tfCpf.setColumns(10);
+		add(tfCpf, "cell 2 5,growx");
 		
 		
 		
@@ -72,7 +76,7 @@ public class CadastroUsuario extends JPanel {
 		panel.setBackground(new Color(178, 34, 34));
 		add(panel, "cell 1 8,grow");
 		
-		JButton btVoltar = new JButton("Voltar");
+		btVoltar = new JButton("Voltar");
 		btVoltar.setBackground(new Color(178, 34, 34));
 		btVoltar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		panel.add(btVoltar);
@@ -82,7 +86,7 @@ public class CadastroUsuario extends JPanel {
 		panel_1.setBackground(new Color(178, 34, 34));
 		add(panel_1, "cell 2 8,grow");
 		
-		JButton btCadastrar = new JButton("Cadastrar");
+		btCadastrar = new JButton("Cadastrar");
 		btCadastrar.setBackground(new Color(178, 34, 34));
 		btCadastrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		panel_1.add(btCadastrar);
@@ -92,5 +96,41 @@ public class CadastroUsuario extends JPanel {
 		identificador.add(rbAdm);
 		identificador.add(rbCliente);
 	}
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
+	}
+
+	public JTextField getTfUsuario() {
+		return tfUsuario;
+	}
+
+	public void setTfUsuario(JTextField tfUsuario) {
+		this.tfUsuario = tfUsuario;
+	}
+
+	public JTextField getTfCpf() {
+		return tfCpf;
+	}
+
+	public void setTfCpf(JTextField tfCpf) {
+		this.tfCpf = tfCpf;
+	}
+	
+	public void voltar(ActionListener actionListener) {
+		this.btVoltar.addActionListener(actionListener);
+		
+	}
+	public void cadastrar(ActionListener actionListener) {
+		this.btCadastrar.addActionListener(actionListener);
+	}
+	
+	
+	
+	
 
 }

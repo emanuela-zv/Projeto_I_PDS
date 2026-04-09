@@ -11,7 +11,7 @@ public class UsuariosDAO {
 	
 	public void adicionarDados(Usuarios usuario) {
 
-		String sql = "INSERT INTO cliente (nome, cpf, usuario, adm VALUES (?,?,?)";
+		String sql = "INSERT INTO usuarios (nome, cpf, usuario, adm) VALUES (?,?,?,?)";
 		
 		Connection conexao = null;
 		PreparedStatement pstm = null;
@@ -23,19 +23,20 @@ public class UsuariosDAO {
 			pstm.setString(1, usuario.getNome());
 			pstm.setString(2, usuario.getCpf());
 			pstm.setString(3, usuario.getUsuario());
+			pstm.setBoolean(4,usuario.isAdm());
 			pstm.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			// BancoDeDados.desconectar(conexao);
-			if (pstm != null) {
-				try {
-					pstm.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		} 
+		
+		finally {
+		    try {
+		        if (pstm != null) pstm.close();
+		        if (conexao != null) conexao.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
 		}
 	}
 	
@@ -51,22 +52,30 @@ public class UsuariosDAO {
             pstm = conexao.prepareStatement(sql);
             rset = pstm.executeQuery();
 
+
             while (rset.next()) {
-                Usuarios usuario = new Usuarios(sql, sql, sql, false);
-                usuario.setNome(rset.getString("nome"));
-                usuario.setCpf(rset.getString("cpf"));
-                usuario.setUsuario(rset.getString("usuario"));
-                usuario.setAdm(rset.getBoolean(0));      
-                
+
+                Usuarios usuario = new Usuarios(
+                    rset.getString("cpf"),
+                    rset.getString("nome"),
+                    rset.getString("usuario"),
+                    rset.getBoolean("adm")
+                );
+
                 usuarios.add(usuario);
-                
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
- //       	BancoDeDados.desconectar(conexao);
-            // Fechar recursos
+            try {
+                if (rset != null) rset.close();
+                if (pstm != null) pstm.close();
+                if (conexao != null) conexao.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
         return usuarios;
     }
 

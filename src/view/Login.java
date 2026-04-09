@@ -18,6 +18,7 @@ public class Login extends JPanel {
 	private JTextField tfUsuario;
 	private JTextField tfCpf;
 	private JButton btEntrar;
+	private JButton btNaoTenhoConta;
 
 	/**
 	 * Create the panel.
@@ -57,7 +58,8 @@ public class Login extends JPanel {
 		panel_3.setBackground(new Color(211, 211, 211));
 		add(panel_3, "cell 1 10,alignx left,growy");
 		
-		JButton btNaoTenhoConta = new JButton("Não tenho conta");
+		btNaoTenhoConta = new JButton("Não tenho conta");
+		
 		btNaoTenhoConta.setForeground(new Color(178, 34, 34));
 		btNaoTenhoConta.setBackground(new Color(211, 211, 211));
 		btNaoTenhoConta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
@@ -78,13 +80,39 @@ public class Login extends JPanel {
 		
 	}
 	
-	public void btEntrar(ActionListener actionListener) {
+	public void entrar(ActionListener actionListener) {
 		this.btEntrar.addActionListener(actionListener);
 	}
 	
-	public void btNaoTenhoConta(ActionListener actionListener) {
-		this.btNaoTenhoConta(actionListener);
+	public void semConta(ActionListener actionListener) {
+		this.btNaoTenhoConta.addActionListener(actionListener);
 	}
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
+	}
+
+	public JTextField getTfUsuario() {
+		return tfUsuario;
+	}
+
+	public void setTfUsuario(JTextField tfUsuario) {
+		this.tfUsuario = tfUsuario;
+	}
+
+	public JTextField getTfCpf() {
+		return tfCpf;
+	}
+
+	public void setTfCpf(JTextField tfCpf) {
+		this.tfCpf = tfCpf;
+	}
+	
+	
 
 }
 

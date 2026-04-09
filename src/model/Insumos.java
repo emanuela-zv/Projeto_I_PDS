@@ -8,8 +8,9 @@ public class Insumos {
 	private int quantidade;
 	private String descricao;
 	private float valor;
+	private int codBarras;
 	
-	public Insumos(String nome, String marca, String fornecedora, int quantidade, String descricao, float valor) {
+	public Insumos(String nome, String marca, String fornecedora, String descricao,  float valor, int quantidade, int codBarras) {
 		
 		super();
 		this.nome = nome;
@@ -18,6 +19,7 @@ public class Insumos {
 		this.quantidade = quantidade;
 		this.descricao = descricao;
 		this.valor = valor;
+		this.codBarras = codBarras;
 	}
 	
 	public String getNome() {
@@ -56,7 +58,15 @@ public class Insumos {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-	
+
+	public int getCodBarras() {
+		return codBarras;
+	}
+
+	public void setCodBarras(int codBarras) {
+		this.codBarras = codBarras;
+	}
+
 	
 	
 

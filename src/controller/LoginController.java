@@ -6,25 +6,32 @@ import javax.swing.JOptionPane;
 
 import model.Usuarios;
 import model.UsuariosDAO;
+import view.CadastroUsuario;
 import view.Login;
 
 public class LoginController {
 	
 	private Login login;
-	private UsuariosDAO usuariosDao = new UsuariosDAO();
+	private UsuariosDAO usuariosDao;
 	private Navegador navegador;
+	private String usuarioExistente;
 	
 
 	public LoginController(Login login, UsuariosDAO usuariosDAO, Navegador navegador) {
 		super();
 		this.login = login;
+		this.usuariosDao =usuariosDao;
 		this.navegador = navegador;
 		
-		this.login.btEntrar(e -> {
+		
+		this.login.entrar(e -> {
 			//ação do botão	
 			verificarUsuario();
 			
-			
+		});
+		
+		this.login.semConta(e ->{
+			this.navegador.navegar("CADASTRO_USUARIO");
 		});
 		
 	}
@@ -33,18 +40,39 @@ public class LoginController {
 		
 		List<Usuarios> usuarios = usuariosDao.listarUsuarios();
 		
-		for (Usuarios u: usuarios) {
-			if(u.getCpf().isEmpty()) {
-				JOptionPane.showInputDialog("Usuário não encontrado", usuarios);
+		if(login.getTfNome().getText().isEmpty() || login.getTfCpf().getText().isEmpty() 
+				|| login.getTfUsuario().getText().isEmpty()) {
+			
+			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+		}
+		
+		else {
+			
+			Usuarios usuarioEncontrado = null;
+			
+			for (Usuarios usuario : usuarios) {
+				
+				if(usuario.getNome().equals(login.getTfNome().getText())
+						&& usuario.getUsuario().equals(login.getTfUsuario().getText())
+						&& usuario.getCpf().equals(login.getTfCpf().getText())){
+					
+					usuarioEncontrado = usuario;
+					break;
+				}
+			}
+			
+			if (usuarioEncontrado != null) {
+
+			    usuarioExistente = usuarioEncontrado.getNome();
+
+			    if (usuarioEncontrado.isAdm()) {
+			        this.navegador.navegar("CADASTRO_INSUMOS");
+			    } else {
+			        this.navegador.navegar("COMPRA");
+			    }
 			}
 			else {
-				if(u.isAdm()==true) {
-					this.navegador.navegar("CADASTROPRODUTOS");
-					
-				}
-				else {
-					this.navegador.navegar("COMPRA");
-				}
+				JOptionPane.showMessageDialog(null, "Usuário não encontrado! \nVerfique as informações.", "Informação", 1);
 			}
 		}
 		

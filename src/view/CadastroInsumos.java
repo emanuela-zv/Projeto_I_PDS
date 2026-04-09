@@ -5,6 +5,8 @@ import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
@@ -18,6 +20,9 @@ public class CadastroInsumos extends JPanel {
 	private JTextField tfCodigoBarras;
 	private JTextField tfQuantidade;
 	private JTextField tfValor;
+	private JButton btVoltar;
+	private JButton btCadastrar;
+	private JTextField tfDescricao;
 
 	/**
 	 * Create the panel.
@@ -76,7 +81,7 @@ public class CadastroInsumos extends JPanel {
 		add(tfQuantidade, "cell 2 7,growx");
 		
 		JLabel lbValor = new JLabel("Valor (da unidade)");
-		lbValor.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lbValor.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		add(lbValor, "cell 1 8,alignx trailing");
 		
 		tfValor = new JTextField();
@@ -86,17 +91,17 @@ public class CadastroInsumos extends JPanel {
 		
 		JLabel lbDescricao = new JLabel("Descrição");
 		lbDescricao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
-		add(lbDescricao, "cell 1 9");
+		add(lbDescricao, "cell 1 9,alignx left");
 		
-		JTextPane tpDescricao = new JTextPane();
-		tpDescricao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
-		add(tpDescricao, "cell 2 9,grow");
+		tfDescricao = new JTextField();
+		add(tfDescricao, "cell 2 9,growx");
+		tfDescricao.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(178, 34, 34));
 		add(panel_1, "cell 1 10,grow");
 		
-		JButton btVoltar = new JButton("Voltar");
+		btVoltar = new JButton("Voltar");
 		btVoltar.setBackground(new Color(178, 34, 34));
 		btVoltar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		panel_1.add(btVoltar);
@@ -106,12 +111,84 @@ public class CadastroInsumos extends JPanel {
 		panel.setBackground(new Color(178, 34, 34));
 		add(panel, "cell 2 10,grow");
 		
-		JButton btCadastrar = new JButton("Cadastrar");
+		btCadastrar = new JButton("Cadastrar");
 		btCadastrar.setBackground(new Color(178, 34, 34));
 		btCadastrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
 		panel.add(btCadastrar);
 		btCadastrar.setBorderPainted(false);
 
 	}
+	
+	public void voltar(ActionListener actionListener) {
+		this.btVoltar.addActionListener(actionListener);
+	}
 
+	public void cadastrar(ActionListener actionListener) {
+		this.btCadastrar.addActionListener(actionListener);
+	}
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
+	}
+
+	public JTextField getTfMarca() {
+		return tfMarca;
+	}
+
+	public void setTfMarca(JTextField tfMarca) {
+		this.tfMarca = tfMarca;
+	}
+
+	public JTextField getTfFornecedora() {
+		return tfFornecedora;
+	}
+
+	public void setTfFornecedora(JTextField tfFornecedora) {
+		this.tfFornecedora = tfFornecedora;
+	}
+
+	public JTextField getTfCodigoBarras() {
+		return tfCodigoBarras;
+	}
+
+	public void setTfCodigoBarras(JTextField tfCodigoBarras) {
+		this.tfCodigoBarras = tfCodigoBarras;
+	}
+
+	public JTextField getTfQuantidade() {
+		return tfQuantidade;
+	}
+
+	public void setTfQuantidade(JTextField tfQuantidade) {
+		this.tfQuantidade = tfQuantidade;
+	}
+
+	public JTextField getTfValor() {
+		return tfValor;
+	}
+
+	public void setTfValor(JTextField tfValor) {
+		this.tfValor = tfValor;
+	}
+
+	public JTextField getTfDescricao() {
+		return tfDescricao;
+	}
+
+	public void setTfDescricao(JTextField tfDescricao) {
+		this.tfDescricao = tfDescricao;
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
 }
