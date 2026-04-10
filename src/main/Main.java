@@ -1,9 +1,13 @@
 package main;
 
+import controller.CadastroInsumosController;
 import controller.CadastroProdutosController;
 import controller.CadastroUsuarioController;
 import controller.LoginController;
 import controller.Navegador;
+import controller.ProdutosController;
+import model.Insumos;
+import model.InsumosDAO;
 import model.UsuariosDAO;
 import view.CadastroInsumos;
 import view.CadastroProdutos;
@@ -23,18 +27,23 @@ public class Main {
 		CadastroProdutos cadastroProdutos = new CadastroProdutos();
 		CadastroUsuario cadastroUsuario = new CadastroUsuario();
 		Produtos produtos = new Produtos();
+		InsumosDAO insumosDao = new InsumosDAO();
+		
 		
 		Compra compra = new Compra();
 		Login login = new Login();
 		
 		Navegador navegador = new Navegador (login, telaPrincipal, cadastroUsuario, cadastroProdutos, cadastroInsumos);
 		
-		UsuariosDAO usuariosDAO = new UsuariosDAO();
+		UsuariosDAO usuariosDao = new UsuariosDAO();
 				
-		LoginController loginController = new LoginController(login, usuariosDAO, navegador);
-		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastroUsuario, navegador, usuariosDAO);
-		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController 
-				(navegador, cadastroInsumos,cadastroProdutos, produtos);
+		LoginController loginController = new LoginController(login, usuariosDao, navegador);
+		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastroUsuario, navegador, usuariosDao);
+		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController(navegador, cadastroInsumos,cadastroProdutos, produtos);
+		ProdutosController produtosController = new ProdutosController(produtos, insumosDao, navegador, cadastroProdutos);
+		CadastroInsumosController cadastroInsumosController = new CadastroInsumosController(cadastroInsumos, navegador, insumosDao, produtos, produtosController );
+		
+				
 		
 		navegador.adicionarPainel("LOGIN", login);
 		navegador.adicionarPainel("CADASTRO_INSUMOS", cadastroInsumos);
@@ -44,7 +53,7 @@ public class Main {
 		navegador.adicionarPainel("PRODUTOS", produtos);
 		
 		telaPrincipal.setVisible(true);
-		navegador.navegar("LOGIN");
+		navegador.navegar("CADASTRO_INSUMOS");
 		
 	}
 

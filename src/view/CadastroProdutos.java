@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -22,50 +24,52 @@ public class CadastroProdutos extends JPanel {
 	 */
 	public CadastroProdutos() {
 		
-		setBackground(new Color(211, 211, 211));
+		setBackground(new Color(255, 255, 224));
 		setLayout(new MigLayout("", "[42.00,grow][grow][grow]", "[grow][][][][][][][grow]"));
+		setPreferredSize(new Dimension(1020,640));
+		setMinimumSize(new Dimension(1020, 640));
 		
 		JLabel lbGerenciarProdutos = new JLabel("Gerência de Produtos");
-		lbGerenciarProdutos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 26));
+		lbGerenciarProdutos.setFont(new Font("Eras Demi ITC", Font.PLAIN, 30));
 		add(lbGerenciarProdutos, "cell 1 1,alignx center,aligny center");
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(178, 34, 34));
+		panel.setBackground(new Color(95, 158, 160));
 		add(panel, "cell 1 3,grow");
 		
 		btCadastrar = new JButton("Cadastrar");
-		btCadastrar.setBackground(new Color(178, 34, 34));
-		btCadastrar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
+		btCadastrar.setBackground(new Color(95, 158, 160));
+		btCadastrar.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
 		panel.add(btCadastrar);
 		btCadastrar.setBorderPainted(false);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(178, 34, 34));
+		panel_1.setBackground(new Color(95, 158, 160));
 		add(panel_1, "cell 1 4,grow");
 		
 		btVisualizar = new JButton("Visualizar");
-		btVisualizar.setBackground(new Color(178, 34, 34));
-		btVisualizar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
+		btVisualizar.setBackground(new Color(95, 158, 160));
+		btVisualizar.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
 		panel_1.add(btVisualizar);
 		btVisualizar.setBorderPainted(false);
 		
 		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setBackground(new Color(178, 34, 34));
+		panel_1_1.setBackground(new Color(95, 158, 160));
 		add(panel_1_1, "cell 1 5,grow");
 		
 		btEditar = new JButton("Editar");
-		btEditar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
+		btEditar.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
 		btEditar.setBorderPainted(false);
-		btEditar.setBackground(new Color(178, 34, 34));
+		btEditar.setBackground(new Color(95, 158, 160));
 		panel_1_1.add(btEditar);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(178, 34, 34));
+		panel_2.setBackground(new Color(95, 158, 160));
 		add(panel_2, "cell 1 6,grow");
 		
 		btRemover = new JButton("Remover");
-		btRemover.setBackground(new Color(178, 34, 34));
-		btRemover.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
+		btRemover.setBackground(new Color(95, 158, 160));
+		btRemover.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
 		panel_2.add(btRemover);
 		btRemover.setBorderPainted(false);		
 

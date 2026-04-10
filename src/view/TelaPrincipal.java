@@ -43,8 +43,10 @@ public class TelaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		
 		this.cardlayout = new CardLayout();
 		this.panelTelas.setLayout(cardlayout);
+		this.setLocationRelativeTo(null);
 		
 		contentPane.add(panelTelas, BorderLayout.CENTER);
 		
@@ -64,7 +66,9 @@ public class TelaPrincipal extends JFrame {
 	public void mostrarTela(String nome) {
 		this.cardlayout.show(this.panelTelas, nome);
 		this.panelAtual = nome;
-		this.pack();
+		
 	}
+	
+	
 
 }

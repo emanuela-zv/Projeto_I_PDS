@@ -10,7 +10,7 @@ import java.util.List;
 public class InsumosDAO {
 	
 	public void adicionarInsumo(Insumos insumo) {
-        String sql = "INSERT INTO insumos (nome, marca, fornecedora, descricao, valor, quantidade, codBarras) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO insumos (nome, marca, fornecedora, descricao, valor, quantidade, codigoBarras) VALUES (?,?,?,?,?,?,?)";
 
         try (Connection conexao = BancoDeDados.conectar();
              PreparedStatement pstm = conexao.prepareStatement(sql)) {
@@ -22,7 +22,7 @@ public class InsumosDAO {
             pstm.setString(4,insumo.getDescricao());
             pstm.setFloat(5, insumo.getValor());
             pstm.setInt(6, insumo.getQuantidade());
-            pstm.setInt(7, insumo.getCodBarras());
+            pstm.setInt(7, insumo.getCodigoBarras());
             
 
             pstm.executeUpdate();
@@ -49,9 +49,10 @@ public class InsumosDAO {
                         rset.getString("descricao"),
                         rset.getFloat("valor"),
                         rset.getInt("quantidade"),
-                        rset.getInt("codBarras")
+                        rset.getInt("codigoBarras")
                         
                 );
+                
                 lista.add(insumo);
             }
 
@@ -63,6 +64,4 @@ public class InsumosDAO {
     }
 	
 	
-	
-
 }
