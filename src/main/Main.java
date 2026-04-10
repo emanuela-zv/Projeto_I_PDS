@@ -53,7 +53,7 @@ public class Main {
 		navegador.adicionarPainel("PRODUTOS", produtos);
 		
 		telaPrincipal.setVisible(true);
-		navegador.navegar("CADASTRO_INSUMOS");
+		navegador.navegar("LOGIN");
 		
 	}
 
