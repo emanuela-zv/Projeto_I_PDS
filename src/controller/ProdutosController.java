@@ -11,108 +11,130 @@ import view.Produtos;
 
 public class ProdutosController {
 
-    private Produtos produtos;
-    private InsumosDAO insumosDao;
-    private Navegador navegador;
-    private CadastroProdutos cadastroProdutos;
+	private Produtos produtos;
+	private InsumosDAO insumosDao;
+	private Navegador navegador;
+	private CadastroProdutos cadastroProdutos;
 
-    public ProdutosController(Produtos produtos,
-                              InsumosDAO insumosDao,
-                              Navegador navegador,
-                              CadastroProdutos cadastroProdutos) {
+	public ProdutosController(Produtos produtos, InsumosDAO insumosDao, Navegador navegador,
+			CadastroProdutos cadastroProdutos) {
 
-        this.produtos = produtos;
-        this.insumosDao = insumosDao;
-        this.navegador = navegador;
-        this.cadastroProdutos = cadastroProdutos;
+		this.produtos = produtos;
+		this.insumosDao = insumosDao;
+		this.navegador = navegador;
+		this.cadastroProdutos = cadastroProdutos;
 
-        
-        this.produtos.voltar(e -> {
-            navegador.navegar("CADASTRO_PRODUTOS");
-        });
+		this.produtos.voltar(e -> {
+			navegador.navegar("CADASTRO_PRODUTOS");
+			produtos.setModoEdicao(false);
+			produtos.setModoExclusao(false);
 
-        
-        this.produtos.salvar(e -> {
+		});
 
-            try {
-                DefaultTableModel modelo = produtos.getModelo();
+		this.produtos.salvar(e -> {
 
-                for (int i = 0; i < modelo.getRowCount(); i++) {
+			try {
+				DefaultTableModel modelo = produtos.getModelo();
 
-                    Insumos ins = new Insumos(null, null, null, null, i, i, i);
+				List<Insumos> listaBanco = insumosDao.listarInsumos();
+				boolean houveAlteracao = false;
 
-                    ins.setNome(modelo.getValueAt(i, 0).toString());
-                    ins.setMarca(modelo.getValueAt(i, 1).toString());
-                    ins.setFornecedora(modelo.getValueAt(i, 2).toString());
-                    ins.setCodigoBarras(Integer.parseInt(modelo.getValueAt(i, 3).toString()));
-                    ins.setQuantidade(Integer.parseInt(modelo.getValueAt(i, 4).toString()));
-                    ins.setValor(Float.parseFloat(modelo.getValueAt(i, 5).toString()));
-                    ins.setDescricao(modelo.getValueAt(i, 6).toString());
+				for (int i = 0; i < modelo.getRowCount(); i++) {
 
-                    insumosDao.atualizar(ins);
-                }
+					Insumos insBanco = listaBanco.get(i);
 
-                produtos.setModoEdicao(false);
+					String nome = modelo.getValueAt(i, 0).toString();
+					String marca = modelo.getValueAt(i, 1).toString();
+					String fornecedora = modelo.getValueAt(i, 2).toString();
+					int codigoBarras = Integer.parseInt(modelo.getValueAt(i, 3).toString());
+					int quantidade = Integer.parseInt(modelo.getValueAt(i, 4).toString());
+					float valor = Float.parseFloat(modelo.getValueAt(i, 5).toString());
+					String descricao = modelo.getValueAt(i, 6).toString();
 
-                JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+					if (!nome.equals(insBanco.getNome()) || !marca.equals(insBanco.getMarca())
+							|| !fornecedora.equals(insBanco.getFornecedora())
+							|| codigoBarras != insBanco.getCodigoBarras() || quantidade != insBanco.getQuantidade()
+							|| valor != insBanco.getValor() || !descricao.equals(insBanco.getDescricao())) {
 
-                carregarTabela();
+						houveAlteracao = true;
 
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Erro ao salvar alterações!");
-            }
-        });
+						Insumos ins = new Insumos(descricao, descricao, descricao, descricao, valor, quantidade,
+								quantidade);
+						ins.setNome(nome);
+						ins.setMarca(marca);
+						ins.setFornecedora(fornecedora);
+						ins.setCodigoBarras(codigoBarras);
+						ins.setQuantidade(quantidade);
+						ins.setValor(valor);
+						ins.setDescricao(descricao);
 
-        this.produtos.excluir(e -> {
+						insumosDao.atualizar(ins);
+					}
+				}
 
-            try {
-            	
-                int linha = produtos.getLinhaSelecionada();
+				if (!produtos.isEditavel()) {
+				    JOptionPane.showMessageDialog(null, "Você não está no modo edição!");
+				    return;
+				}
+				if (houveAlteracao) {
+				    JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+				}
+				else {
+				    JOptionPane.showMessageDialog(null, "Nenhuma alteração foi feita.");
+				}
 
-                if (linha == -1) {
-                    JOptionPane.showMessageDialog(null, "Selecione uma linha!");
-                    return;
-                }
+				carregarTabela();
 
-                int codigo = Integer.parseInt(
-                        produtos.getModelo().getValueAt(linha, 3).toString()
-                );
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Erro ao salvar alterações!");
+			}
+		});
 
-                insumosDao.remover(codigo);
+		this.produtos.excluir(e -> {
 
-                produtos.setModoExclusao(false);
-                carregarTabela();
+			try {
 
-                JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
-                produtos.setModoExclusao(true);
+				int linha = produtos.getLinhaSelecionada();
 
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        
-        carregarTabela();
-    }
+				if(!produtos.ismodoExclusao()) {
+					JOptionPane.showMessageDialog(null, "Você não está no modo de exclusão.");
+					return;
+				}
+				if (linha == -1) {
+					JOptionPane.showMessageDialog(null, "Selecione uma linha!");
+					return;
+				}
 
-    
-    public void carregarTabela() {
+				int codigo = Integer.parseInt(produtos.getModelo().getValueAt(linha, 3).toString());
 
-        produtos.limparTabela();
+				insumosDao.remover(codigo);
 
-        List<Insumos> lista = insumosDao.listarInsumos();
+				produtos.setModoExclusao(false);
+				carregarTabela();
 
-        for (Insumos ins : lista) {
+				JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
 
-            produtos.getModelo().addRow(new Object[]{
-                ins.getNome(),
-                ins.getMarca(),
-                ins.getFornecedora(),
-                ins.getCodigoBarras(),
-                ins.getQuantidade(),
-                ins.getValor(),
-                ins.getDescricao()
-            });
-        }
-    }
+				produtos.setModoExclusao(true);
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		});
+
+		carregarTabela();
+	}
+
+	public void carregarTabela() {
+
+		produtos.limparTabela();
+
+		List<Insumos> lista = insumosDao.listarInsumos();
+
+		for (Insumos ins : lista) {
+
+			produtos.getModelo().addRow(new Object[] { ins.getNome(), ins.getMarca(), ins.getFornecedora(),
+					ins.getCodigoBarras(), ins.getQuantidade(), ins.getValor(), ins.getDescricao() });
+		}
+	}
 }

@@ -67,7 +67,7 @@ public class LoginController {
 			    usuarioExistente = usuarioEncontrado.getNome();
 
 			    if (usuarioEncontrado.isAdm()) {
-			        this.navegador.navegar("CADASTRO_INSUMOS");
+			        this.navegador.navegar("CADASTRO_PRODUTOS");
 			    } else {
 			        this.navegador.navegar("COMPRA");
 			    }

@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ public class Produtos extends JPanel {
     private JPanel panel_1_2;
     private JButton btExcluir;
     private boolean editavel = false;
+    private boolean valor = false;
     private boolean modoExclusao = false;
     private int linhaSelecionada = -1;
     
@@ -87,6 +89,33 @@ public class Produtos extends JPanel {
                 linhaSelecionada = tabelaInsumos.getSelectedRow();
             }
         });
+        
+        for (int col = 0; col < tabelaInsumos.getColumnCount(); col++) {
+            int maxWidth = 0;
+
+            // Header
+            Component comp = tabelaInsumos.getTableHeader()
+                .getDefaultRenderer()
+                .getTableCellRendererComponent(
+                    tabelaInsumos,
+                    tabelaInsumos.getColumnName(col),
+                    false, false, 0, col
+                );
+            maxWidth = comp.getPreferredSize().width;
+
+            // Linhas
+            for (int row = 0; row < tabelaInsumos.getRowCount(); row++) {
+                comp = tabelaInsumos.getCellRenderer(row, col)
+                    .getTableCellRendererComponent(
+                        tabelaInsumos,
+                        tabelaInsumos.getValueAt(row, col),
+                        false, false, row, col
+                    );
+                maxWidth = Math.max(maxWidth, comp.getPreferredSize().width);
+            }
+
+            tabelaInsumos.getColumnModel().getColumn(col).setPreferredWidth(maxWidth + 20);
+        }
     }
 
     public DefaultTableModel getModelo() {
@@ -115,19 +144,24 @@ public class Produtos extends JPanel {
 	    this.editavel = valor;
 	}
 	
-    public void setModoExclusao(boolean valor) {
+    public boolean isEditavel() {
+		return editavel;
+	}
+
+	public void setEditavel(boolean editavel) {
+		this.editavel = editavel;
+	}
+
+	public void setModoExclusao(boolean valor) {
         this.modoExclusao = valor;
 
-        if (valor) {
-            btExcluir.setBackground(new Color(220, 20, 60));
-            btExcluir.setText("Selecione uma linha");
-        } else {
-            btExcluir.setBackground(new Color(95, 158, 160));
-            btExcluir.setText("Excluir");
             linhaSelecionada = -1;
             tabelaInsumos.clearSelection();
-        }
     }
+	
+	public boolean ismodoExclusao() {
+		return modoExclusao;
+	}
 	
 	public void excluir(ActionListener actionListener) {
 		this.btExcluir.addActionListener(actionListener);
