@@ -25,6 +25,8 @@ public class CadastroUsuario extends JPanel {
 	private JButton btCadastrar;
 	private JRadioButton rbCliente;
 	private JRadioButton rbAdm;
+	private ButtonGroup identificador;
+	
 	
 	/**
 	 * Create the panel.
@@ -97,7 +99,7 @@ public class CadastroUsuario extends JPanel {
 		panel_1.add(btCadastrar);
 		btCadastrar.setBorderPainted(false);
 				
-		ButtonGroup identificador = new ButtonGroup();
+		identificador = new ButtonGroup();
 		identificador.add(rbAdm);
 		identificador.add(rbCliente);
 	}
@@ -141,6 +143,11 @@ public class CadastroUsuario extends JPanel {
 	public void setRbAdm(JRadioButton rbAdm) {
 		this.rbAdm = rbAdm;
 	}
+	
+	public void limparSelecao() {
+		identificador.clearSelection();
+	}
+	
 
 	public void voltar(ActionListener actionListener) {
 		this.btVoltar.addActionListener(actionListener);

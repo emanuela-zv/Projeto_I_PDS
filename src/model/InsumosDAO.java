@@ -62,6 +62,42 @@ public class InsumosDAO {
 
         return lista;
     }
-	
+    
+    public void atualizar(Insumos insumo) {
+
+        String sql = "UPDATE insumos SET nome=?, marca=?, fornecedora=?, quantidade=?, valor=?, descricao=? WHERE codigoBarras=?";
+
+        try (Connection conexao = BancoDeDados.conectar();
+                PreparedStatement pstm = conexao.prepareStatement(sql)) {
+
+            pstm.setString(1, insumo.getNome());
+            pstm.setString(2, insumo.getMarca());
+            pstm.setString(3, insumo.getFornecedora());
+            pstm.setInt(4, insumo.getQuantidade());
+            pstm.setDouble(5, insumo.getValor());
+            pstm.setString(6, insumo.getDescricao());
+            pstm.setInt(7, insumo.getCodigoBarras());
+
+            pstm.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void remover(int codigoBarras) {
+
+        String sql = "DELETE FROM insumos WHERE codigoBarras = ?";
+
+        try (Connection conexao = BancoDeDados.conectar();
+             PreparedStatement pstm = conexao.prepareStatement(sql)) {
+
+            pstm.setInt(1, codigoBarras);
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 	
 }

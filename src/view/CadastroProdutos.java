@@ -18,6 +18,7 @@ public class CadastroProdutos extends JPanel {
 	private JButton btEditar;
 	private JButton btCadastrar;
 	private JButton btRemover;
+	private boolean modoExclusao = false;
 
 	/**
 	 * Create the panel.

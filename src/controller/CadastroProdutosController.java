@@ -24,15 +24,19 @@ public class CadastroProdutosController {
 			this.navegador.navegar("CADASTRO_INSUMOS");
 		});
 		
-		this.cadastroProdutos.visualizar(e ->{
+		this.cadastroProdutos.visualizar(e -> {
 			this.navegador.navegar("PRODUTOS");
 		});
 		
-		this.cadastroProdutos.editar(e ->{
+		this.cadastroProdutos.editar(e -> {
 			this.navegador.navegar("PRODUTOS");
+			produtos.setModoEdicao(true);
 		});
-		this.cadastroProdutos.remover(e ->{
+		
+		this.cadastroProdutos.remover(e -> {
+			produtos.setModoExclusao(true);
 			this.navegador.navegar("PRODUTOS");
+			
 		});
 		
 	}

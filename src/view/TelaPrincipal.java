@@ -37,7 +37,6 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 618, 493);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -46,6 +45,7 @@ public class TelaPrincipal extends JFrame {
 		
 		this.cardlayout = new CardLayout();
 		this.panelTelas.setLayout(cardlayout);
+		this.setSize(1060,640);
 		this.setLocationRelativeTo(null);
 		
 		contentPane.add(panelTelas, BorderLayout.CENTER);

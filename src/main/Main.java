@@ -53,7 +53,7 @@ public class Main {
 		navegador.adicionarPainel("PRODUTOS", produtos);
 		
 		telaPrincipal.setVisible(true);
-		navegador.navegar("LOGIN");
+		navegador.navegar("PRODUTOS");
 		
 	}
 

@@ -66,8 +66,6 @@ public class Insumos {
 	public void setCodigoBarras(int codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
-
-	
-	
+		
 
 }

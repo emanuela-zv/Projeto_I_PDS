@@ -43,6 +43,7 @@ public class CadastroInsumosController {
 				}
 				
 				if (!verificarCodigoBarras(cadastroInsumos.getTfCodigoBarras().getText())) {
+					
 					Insumos novoInsumo = new Insumos(
 							cadastroInsumos.getTfNome().getText(), 
 							cadastroInsumos.getTfMarca().getText(),
@@ -54,8 +55,10 @@ public class CadastroInsumosController {
 
 					insumosDao.adicionarInsumo(novoInsumo);
 					JOptionPane.showMessageDialog(null, "Produto Cadastrado com sucesso!");
+					
 					produtosController.carregarTabela();
 					limparDados();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Código de barras já cadastrado! \n Caso queira utiliz-a-lo, você deve voltar e clicar em 'editar'", 
 							"Atenção", 2);
@@ -75,6 +78,7 @@ public class CadastroInsumosController {
 			}
 		}
 		return false;
+		
 	}
 
 	public void limparDados() {

@@ -32,6 +32,7 @@ public class LoginController {
 		
 		this.login.semConta(e ->{
 			this.navegador.navegar("CADASTRO_USUARIO");
+			limparDados();
 		});
 		
 	}
@@ -77,6 +78,12 @@ public class LoginController {
 			}
 		}
 		
+	}
+	
+	public void limparDados(){
+		login.getTfNome().setText("");
+		login.getTfCpf().setText("");
+		login.getTfUsuario().setText("");		
 	}
 	
 	
