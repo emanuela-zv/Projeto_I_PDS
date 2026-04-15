@@ -27,6 +27,7 @@ public class TelaPrincipal extends JFrame {
 		this.panelTelas.setLayout(cardlayout);
 		this.setSize(1100,640);
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 		
 		contentPane.add(panelTelas, BorderLayout.CENTER);
 		
