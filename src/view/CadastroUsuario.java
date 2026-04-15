@@ -39,44 +39,44 @@ public class CadastroUsuario extends JPanel {
 		
 		
 		JLabel lbCadastroUsuario = new JLabel("Cadastro de usuário");
-		lbCadastroUsuario.setFont(new Font("Eras Demi ITC", Font.PLAIN, 30));
+		lbCadastroUsuario.setFont(new Font("Times New Roman", Font.BOLD, 35));
 		add(lbCadastroUsuario, "cell 1 1 2 1,alignx center");
 		
 		JLabel lbNome = new JLabel("Nome completo");
-		lbNome.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+		lbNome.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbNome, "cell 1 3");
 		
 		tfNome = new JTextField();
-		tfNome.setFont(new Font("Eras Medium ITC", Font.PLAIN, 22));
+		tfNome.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		add(tfNome, "cell 2 3,growx");
 		tfNome.setColumns(10);
 		
 		JLabel lbUsuario = new JLabel("Usuário");
-		lbUsuario.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+		lbUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbUsuario, "cell 1 4,alignx left");
 		
 		tfUsuario = new JTextField();
-		tfUsuario.setFont(new Font("Eras Medium ITC", Font.PLAIN, 22));
+		tfUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfUsuario.setColumns(10);
 		add(tfUsuario, "cell 2 4,growx");
 		
 		JLabel lbCpf = new JLabel("CPF");
-		lbCpf.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+		lbCpf.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbCpf, "cell 1 5,alignx left");
 		
 		tfCpf = new JTextField();
-		tfCpf.setFont(new Font("Eras Medium ITC", Font.PLAIN, 22));
+		tfCpf.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfCpf.setColumns(10);
 		add(tfCpf, "cell 2 5,growx");
 				
 		rbCliente = new JRadioButton("Sou cliente");
 		rbCliente.setBackground(new Color(255, 255, 224));
-		rbCliente.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+		rbCliente.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(rbCliente, "cell 1 6,alignx left");
 		
 		rbAdm = new JRadioButton("Sou administrador");
 		rbAdm.setBackground(new Color(255, 255, 224));
-		rbAdm.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+		rbAdm.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(rbAdm, "cell 2 6,alignx center");
 				
 		JPanel panel = new JPanel();
@@ -85,7 +85,7 @@ public class CadastroUsuario extends JPanel {
 		
 		btVoltar = new JButton("Voltar");
 		btVoltar.setBackground(new Color(95, 158, 160));
-		btVoltar.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+		btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		panel.add(btVoltar);
 		btVoltar.setBorderPainted(false);
 		
@@ -95,7 +95,7 @@ public class CadastroUsuario extends JPanel {
 		
 		btCadastrar = new JButton("Cadastrar");
 		btCadastrar.setBackground(new Color(95, 158, 160));
-		btCadastrar.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+		btCadastrar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		panel_1.add(btCadastrar);
 		btCadastrar.setBorderPainted(false);
 				
@@ -158,7 +158,4 @@ public class CadastroUsuario extends JPanel {
 	}
 	
 	
-	
-	
-
 }

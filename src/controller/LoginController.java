@@ -41,7 +41,7 @@ public class LoginController {
 		
 		List<Usuarios> usuarios = usuariosDao.listarUsuarios();
 		
-		if(login.getTfNome().getText().isEmpty() || login.getTfCpf().getText().isEmpty() 
+		if(login.getTfCpf().getText().isEmpty() 
 				|| login.getTfUsuario().getText().isEmpty()) {
 			
 			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
@@ -53,8 +53,7 @@ public class LoginController {
 			
 			for (Usuarios usuario : usuarios) {
 				
-				if(usuario.getNome().equals(login.getTfNome().getText())
-						&& usuario.getUsuario().equals(login.getTfUsuario().getText())
+				if(usuario.getUsuario().equals(login.getTfUsuario().getText())
 						&& usuario.getCpf().equals(login.getTfCpf().getText())){
 					
 					usuarioEncontrado = usuario;
@@ -81,7 +80,6 @@ public class LoginController {
 	}
 	
 	public void limparDados(){
-		login.getTfNome().setText("");
 		login.getTfCpf().setText("");
 		login.getTfUsuario().setText("");		
 	}

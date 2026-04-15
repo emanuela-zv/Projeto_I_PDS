@@ -26,7 +26,7 @@ public class Produtos extends JPanel {
     
     public Produtos() {
 
-        setLayout(new MigLayout("", "[grow][137][230.00][137.00][137][grow]", "[grow][][][grow]"));
+        setLayout(new MigLayout("", "[24.00,grow][184.00][230.00][137.00][239.00][grow]", "[grow][grow][][grow]"));
         setBackground(new Color(255, 255, 224));
         
         modelo = new DefaultTableModel(
@@ -49,17 +49,17 @@ public class Produtos extends JPanel {
         panel_1.setBackground(new Color(95, 158, 160));
         add(panel_1, "cell 1 2,grow");
         
-        tabelaInsumos.setFont(new Font("Eras Medium ITC", Font.PLAIN, 16));
+        tabelaInsumos.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         tabelaInsumos.setRowHeight(28);
         tabelaInsumos.setSelectionBackground(new Color(128, 206, 209));
         tabelaInsumos.setSelectionForeground(Color.BLACK);
         
         tabelaInsumos.getTableHeader().setBackground(new Color(95, 158, 160));
         tabelaInsumos.getTableHeader().setForeground(Color.BLACK);
-        tabelaInsumos.getTableHeader().setFont(new Font("Eras Demi ITC", Font.BOLD, 16));
+        tabelaInsumos.getTableHeader().setFont(new Font("Times New Roman", Font.PLAIN, 25));
 
         btVoltar = new JButton("Voltar");
-        btVoltar.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+        btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
         btVoltar.setBorderPainted(false);
         btVoltar.setBackground(new Color(95, 158, 160));
         panel_1.add(btVoltar);
@@ -68,8 +68,8 @@ public class Produtos extends JPanel {
         panel_1_1.setBackground(new Color(95, 158, 160));
         add(panel_1_1, "cell 3 2,grow");
                 
-        btSalvar = new JButton("Salvar");
-        btSalvar.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+        btSalvar = new JButton("Salvar edições");
+        btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
         btSalvar.setBorderPainted(false);
         btSalvar.setBackground(new Color(95, 158, 160));
         panel_1_1.add(btSalvar);
@@ -79,7 +79,7 @@ public class Produtos extends JPanel {
         add(panel_1_2, "cell 4 2,grow");
         
         btExcluir = new JButton("Excluir");
-        btExcluir.setFont(new Font("Eras Demi ITC", Font.PLAIN, 25));
+        btExcluir.setFont(new Font("Times New Roman", Font.PLAIN, 30));
         btExcluir.setBorderPainted(false);
         btExcluir.setBackground(new Color(95, 158, 160));
         panel_1_2.add(btExcluir);
@@ -90,32 +90,17 @@ public class Produtos extends JPanel {
             }
         });
         
-        for (int col = 0; col < tabelaInsumos.getColumnCount(); col++) {
-            int maxWidth = 0;
-
-            // Header
-            Component comp = tabelaInsumos.getTableHeader()
-                .getDefaultRenderer()
-                .getTableCellRendererComponent(
-                    tabelaInsumos,
-                    tabelaInsumos.getColumnName(col),
-                    false, false, 0, col
-                );
-            maxWidth = comp.getPreferredSize().width;
-
-            // Linhas
-            for (int row = 0; row < tabelaInsumos.getRowCount(); row++) {
-                comp = tabelaInsumos.getCellRenderer(row, col)
-                    .getTableCellRendererComponent(
-                        tabelaInsumos,
-                        tabelaInsumos.getValueAt(row, col),
-                        false, false, row, col
-                    );
-                maxWidth = Math.max(maxWidth, comp.getPreferredSize().width);
-            }
-
-            tabelaInsumos.getColumnModel().getColumn(col).setPreferredWidth(maxWidth + 20);
-        }
+        tabelaInsumos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabelaInsumos.getColumnModel().getColumn(0).setPreferredWidth(120);
+        tabelaInsumos.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tabelaInsumos.getColumnModel().getColumn(2).setPreferredWidth(140);
+        tabelaInsumos.getColumnModel().getColumn(3).setPreferredWidth(130);
+        tabelaInsumos.getColumnModel().getColumn(4).setPreferredWidth(130);
+        tabelaInsumos.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tabelaInsumos.getColumnModel().getColumn(6).setPreferredWidth(144);
+        
+        tabelaInsumos.getTableHeader().setReorderingAllowed(false);
+        tabelaInsumos.getTableHeader().setResizingAllowed(false);
     }
 
     public DefaultTableModel getModelo() {
