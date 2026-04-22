@@ -6,83 +6,116 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.util.List;
 
 public class Carrinho extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private JTable tabelaCarrinho;
-	private DefaultTableModel modelo;
-	private JButton btNota;
-	private JButton btVoltar;
-	private JButton btRemover;
-	private JButton btFinalizarCompra;
+    private static final long serialVersionUID = 1L;
 
-	public Carrinho() {
-		setLayout(new MigLayout("", "[][][][][]", "[][][211.00][][]"));
+    private JTable tabelaCarrinho;
+    private DefaultTableModel modelo;
+    private JButton btNota;
+    private JButton btVoltar;
+    private JButton btRemover;
+    private JButton btFinalizarCompra;
+    private JLabel lbTotal;
+    private int linhaSelecionada = -1;
+
+    public Carrinho() {
+
+        setLayout(new MigLayout("", "[grow][][][][][][grow]", "[grow][187.00][][42.00,grow]"));
+        setBackground(new Color(255, 255, 225));
+        
+
+        modelo = new DefaultTableModel(
+            new Object[]{"Produto", "Quantidade", "Valor unitário", "Subtotal"},
+            0
+        );
+
+        tabelaCarrinho = new JTable(modelo);
+        
+        tabelaCarrinho.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        
+		JTableHeader header = tabelaCarrinho.getTableHeader();
+		header.setBackground(new Color(95, 158, 160));
+		header.setForeground(new Color(0,0,0));
+		header.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		
-         modelo = new DefaultTableModel(
-                new Object[]{"Produto", "Quantidade", "Valor unitário", "Subtotal"},
-                0
-            ) {                
-            };
-                   
-            tabelaCarrinho = new JTable(modelo);   
-            
-		JScrollPane scrollPane_1 = new JScrollPane();
-		add(scrollPane_1, "cell 1 2 3 1,grow");
-		
-		tabelaCarrinho = new JTable();
-		tabelaCarrinho.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		scrollPane_1.setViewportView(tabelaCarrinho);
-		
-		btVoltar = new JButton("Voltar");
-		add(btVoltar, "cell 1 3");
-		btVoltar.setBackground(new Color(95, 158, 160));
-		btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		btVoltar.setBorderPainted(false);
-		
-		btRemover = new JButton("Remover");
-		btRemover.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		btRemover.setBackground(new Color(95, 158, 160));
-		add(btRemover, "cell 2 3");
-		btRemover.setBorderPainted(false);
-		
-		btFinalizarCompra = new JButton("Finalizar Compra");
-		btFinalizarCompra.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		btFinalizarCompra.setBackground(new Color(95, 158, 160));
-		add(btFinalizarCompra, "cell 3 3");
-		btFinalizarCompra.setBorderPainted(false);
-		
-		JPanel panel = new JPanel();
-		add(panel, "cell 1 4,grow");
-		
-		btNota = new JButton("Emitir nota fiscal");
-		btNota.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		btNota.setBackground(new Color(95, 158, 160));
-		add(btNota, "cell 3 4");
-		btNota.setBorderPainted(false);
-		
+
+        JScrollPane scrollPane = new JScrollPane(tabelaCarrinho);
+        add(scrollPane, "cell 1 1 5 1,grow");
+        
+        tabelaCarrinho.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                linhaSelecionada = tabelaCarrinho.getSelectedRow();
+            }
+        });
+
+        btVoltar = new JButton("Voltar");
+        btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        btVoltar.setBackground(new Color(95, 158, 160));
+        btVoltar.setBorderPainted(false);
+        add(btVoltar, "cell 1 2");
+
+        btRemover = new JButton("Remover");
+        btRemover.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        btRemover.setBackground(new Color(95, 158, 160));
+        btRemover.setBorderPainted(false);
+        add(btRemover, "cell 2 2");
+
+        btFinalizarCompra = new JButton("Finalizar Compra");
+        btFinalizarCompra.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        btFinalizarCompra.setBackground(new Color(95, 158, 160));
+        btFinalizarCompra.setBorderPainted(false);
+        add(btFinalizarCompra, "cell 3 2");
+
+        btNota = new JButton("Emitir nota fiscal");
+        btNota.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        btNota.setBackground(new Color(95, 158, 160));
+        btNota.setBorderPainted(false);
+        add(btNota, "cell 4 2");
+
+        lbTotal = new JLabel("Total: R$ 0,00");
+        lbTotal.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        add(lbTotal, "cell 5 2");
+    }
+    
+    public void notaFiscal(ActionListener actionListener) {
+    	this.btNota.addActionListener(actionListener);
+    }
+    public void finalizar(ActionListener actionListener) {
+    	this.btFinalizarCompra.addActionListener(actionListener);
+    }
+    public void remover(ActionListener actionListener) {
+    	this.btRemover.addActionListener(actionListener);
+    }
+    public void voltar(ActionListener actionListener) {
+    	this.btVoltar.addActionListener(actionListener);
+    }
+    
+    public DefaultTableModel getModelo() {
+        return modelo;
+    }
+    
+    public void adicionarLinha(Object[] linha) {
+        modelo.addRow(linha);
+    }
+    public void setLbTotal(String texto) {
+        lbTotal.setText(texto);
+    }
+
+	public void limparTabela() {
+		modelo.setRowCount(0);
 	}
 	
-	public void voltar(ActionListener actionListener) {
-		this.btVoltar.addActionListener(actionListener);
-	}
-	public void remover(ActionListener actionListener) {
-		this.btRemover.addActionListener(actionListener);
-	}
-	public void finalizarCompra(ActionListener actionListener) {
-		this.btFinalizarCompra.addActionListener(actionListener);
-	}
-	public void nota(ActionListener actionListener) {
-		this.btNota.addActionListener(actionListener);
-	}
-	
-	
+    public int getLinhaSelecionada() {
+        return linhaSelecionada;
+    }
 
 }

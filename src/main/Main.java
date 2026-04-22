@@ -3,6 +3,8 @@ package main;
 import controller.CadastroInsumosController;
 import controller.CadastroProdutosController;
 import controller.CadastroUsuarioController;
+import controller.CarrinhoController;
+import controller.CompraController;
 import controller.LoginController;
 import controller.Navegador;
 import controller.ProdutosController;
@@ -31,9 +33,10 @@ public class Main {
 		Compra compra = new Compra();
 		Login login = new Login();
 		Carrinho carrinho = new Carrinho();
-		
+
 		UsuariosDAO usuariosDao = new UsuariosDAO();
 		InsumosDAO insumosDao = new InsumosDAO();
+		Insumos insumos = new Insumos(null, null, null, null, 0, 0, 0);
 		
 		Navegador navegador = new Navegador (login, telaPrincipal, cadastroUsuario, cadastroProdutos, cadastroInsumos);				
 		LoginController loginController = new LoginController(login, usuariosDao, navegador);
@@ -41,7 +44,8 @@ public class Main {
 		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController(navegador, cadastroInsumos,cadastroProdutos, produtos);
 		ProdutosController produtosController = new ProdutosController(produtos, insumosDao, navegador, cadastroProdutos);
 		CadastroInsumosController cadastroInsumosController = new CadastroInsumosController(cadastroInsumos, navegador, insumosDao, produtos, produtosController );
-	
+		CarrinhoController carrinhoController = new CarrinhoController(cadastroUsuario, carrinho, insumosDao, compra, navegador);
+		CompraController compraController = new CompraController(compra, carrinho, insumos, navegador, insumosDao, carrinhoController);
 		
 		navegador.adicionarPainel("LOGIN", login);
 		navegador.adicionarPainel("CADASTRO_INSUMOS", cadastroInsumos);
@@ -50,9 +54,10 @@ public class Main {
 		navegador.adicionarPainel("COMPRA", compra);	
 		navegador.adicionarPainel("PRODUTOS", produtos);
 		navegador.adicionarPainel("CARRINHO", carrinho);
+
 		
 		telaPrincipal.setVisible(true);
-		navegador.navegar("CARRINHO");
+		navegador.navegar("LOGIN");
 		
 	}
 
