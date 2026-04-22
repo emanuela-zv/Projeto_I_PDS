@@ -23,5 +23,4 @@ valor DECIMAL (10,2) NOT NULL,
 quantidade INT NOT NULL,
 codBarras BIGINT PRIMARY KEY NOT NULL
 
-
 );

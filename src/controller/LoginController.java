@@ -84,6 +84,16 @@ public class LoginController {
 		login.getTfUsuario().setText("");		
 	}
 	
+//	public void logout() {
+//	    // Limpa dados do usuário (se você tiver algo assim)
+//	    login.setUsuario(null);
+//
+//	    // Limpa carrinho
+//	    carrinhoController.limparCarrinho();
+//
+//	    // Navega para tela de login
+//	    navegador.navegar("LOGIN");
+//	}
 	
 	
 	

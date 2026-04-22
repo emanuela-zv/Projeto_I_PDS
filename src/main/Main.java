@@ -10,6 +10,7 @@ import controller.Navegador;
 import controller.ProdutosController;
 import model.Insumos;
 import model.InsumosDAO;
+import model.Usuarios;
 import model.UsuariosDAO;
 import view.CadastroInsumos;
 import view.CadastroProdutos;
@@ -35,6 +36,7 @@ public class Main {
 		Carrinho carrinho = new Carrinho();
 
 		UsuariosDAO usuariosDao = new UsuariosDAO();
+		Usuarios usuarios = new Usuarios(null, null, null, false);
 		InsumosDAO insumosDao = new InsumosDAO();
 		Insumos insumos = new Insumos(null, null, null, null, 0, 0, 0);
 		
@@ -44,7 +46,7 @@ public class Main {
 		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController(navegador, cadastroInsumos,cadastroProdutos, produtos);
 		ProdutosController produtosController = new ProdutosController(produtos, insumosDao, navegador, cadastroProdutos);
 		CadastroInsumosController cadastroInsumosController = new CadastroInsumosController(cadastroInsumos, navegador, insumosDao, produtos, produtosController );
-		CarrinhoController carrinhoController = new CarrinhoController(cadastroUsuario, carrinho, insumosDao, compra, navegador);
+		CarrinhoController carrinhoController = new CarrinhoController(usuarios, carrinho, insumosDao, compra, navegador);
 		CompraController compraController = new CompraController(compra, carrinho, insumos, navegador, insumosDao, carrinhoController);
 		
 		navegador.adicionarPainel("LOGIN", login);

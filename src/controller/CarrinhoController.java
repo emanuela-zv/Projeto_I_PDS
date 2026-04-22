@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Insumos;
 import model.InsumosDAO;
+import model.Usuarios;
 import view.CadastroInsumos;
 import view.CadastroUsuario;
 import view.Carrinho;
@@ -17,17 +18,17 @@ import view.Compra;
 
 public class CarrinhoController {
 	
-	private CadastroUsuario cadastroUsuario;
+	private Usuarios usuarios;
 	private Carrinho carrinho;
 	private InsumosDAO insumosDao;
 	private Compra compra;
 	private Navegador navegador;
 	private List<Object[]> itensCarrinho = new ArrayList<>();
 	
-	public CarrinhoController(CadastroUsuario cadastroUsuario, Carrinho carrinho, InsumosDAO insumosDao,
+	public CarrinhoController(Usuarios usuarios, Carrinho carrinho, InsumosDAO insumosDao,
 			Compra compra, Navegador navegador) {
 		super();
-		this.cadastroUsuario = cadastroUsuario;
+		this.usuarios = usuarios;
 		this.carrinho = carrinho;
 		this.insumosDao = insumosDao;
 		this.compra = compra;
@@ -38,7 +39,6 @@ public class CarrinhoController {
 		});
 		
 		this.carrinho.remover(e -> {
-
 
             int linha = carrinho.getLinhaSelecionada();
 
@@ -75,8 +75,8 @@ public class CarrinhoController {
 
 
 		    String Nota = 
-		        "Cliente: " + cadastroUsuario.getTfNome().getText() +
-		        "\nCPF: " + cadastroUsuario.getTfCpf().getText() +
+		        "Cliente: " + usuarios.getNome() +
+		        "\nCPF: " + usuarios.getCpf() +
 		        "\nProdutos:\n" + listaProdutos +
 		        "\nTotal: R$ " + String.format("%.2f", total);
 

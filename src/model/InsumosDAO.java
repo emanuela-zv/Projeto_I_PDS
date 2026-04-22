@@ -77,6 +77,20 @@ public class InsumosDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void atualizarQuantidade(int id, int novaQuantidade) {
+	    String sql = "UPDATE insumos SET quantidade = ? WHERE id = ?";
+
+	    try (Connection conexao = BancoDeDados.conectar(); PreparedStatement pstm = conexao.prepareStatement(sql)) {
+
+	        pstm.setInt(1, novaQuantidade);
+	        pstm.setInt(2, id);
+	        pstm.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 
 	public void remover(int codigoBarras) {
 

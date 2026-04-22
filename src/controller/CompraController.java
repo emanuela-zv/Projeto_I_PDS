@@ -60,15 +60,25 @@ public class CompraController {
 		            selecionado.getValor()
 		    );
 		    
-		    System.out.println("SELECTED ITEM: " + compra.getCbInsumos().getSelectedItem());
-		    System.out.println("NOME: " + ((Insumos) compra.getCbInsumos().getSelectedItem()).getNome());
-		    
+		    int novaQuantidade = selecionado.getQuantidade() - qtd;
+		    selecionado.setQuantidade(novaQuantidade);
+
+		    // Atualiza no banco
+		    insumosDao.atualizarQuantidade(selecionado.getQuantidade(), novaQuantidade);
+
+		    // Atualiza limite do spinner
+		    compra.configurarLimiteEstoque(novaQuantidade);
+		    		    
 		    compra.getCbInsumos().setSelectedIndex(0);
 		    compra.spinnerQuant.setValue(1);
 		    compra.atualizarValorTotal(0);
 		    compra.getCbInsumos().requestFocus();
 
 		    JOptionPane.showMessageDialog(compra, "Adicionado ao carrinho!");
+		    
+		    selecionado.setQuantidade(novaQuantidade);
+		    carregarProdutosDoEstoque();
+		    
 		});
 
 		this.compra.carrinho(e -> {
