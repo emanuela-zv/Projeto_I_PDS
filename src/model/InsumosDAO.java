@@ -78,13 +78,14 @@ public class InsumosDAO {
 		}
 	}
 	
-	public void atualizarQuantidade(int id, int novaQuantidade) {
-	    String sql = "UPDATE insumos SET quantidade = ? WHERE id = ?";
+	public void atualizarQuantidade(int codigoBarras, int novaQuantidade) {
+	    String sql = "UPDATE insumos SET quantidade = ? WHERE codigoBarras = ?";
 
-	    try (Connection conexao = BancoDeDados.conectar(); PreparedStatement pstm = conexao.prepareStatement(sql)) {
+	    try (Connection conexao = BancoDeDados.conectar();
+	         PreparedStatement pstm = conexao.prepareStatement(sql)) {
 
 	        pstm.setInt(1, novaQuantidade);
-	        pstm.setInt(2, id);
+	        pstm.setInt(2, codigoBarras);
 	        pstm.executeUpdate();
 
 	    } catch (SQLException e) {

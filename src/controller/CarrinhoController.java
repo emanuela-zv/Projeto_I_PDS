@@ -23,16 +23,20 @@ public class CarrinhoController {
 	private InsumosDAO insumosDao;
 	private Compra compra;
 	private Navegador navegador;
+	private LoginController loginController;
 	private List<Object[]> itensCarrinho = new ArrayList<>();
 	
-	public CarrinhoController(Usuarios usuarios, Carrinho carrinho, InsumosDAO insumosDao,
-			Compra compra, Navegador navegador) {
+	public CarrinhoController(Carrinho carrinho, InsumosDAO insumosDao,
+	        Compra compra, Navegador navegador) {
 		super();
-		this.usuarios = usuarios;
 		this.carrinho = carrinho;
 		this.insumosDao = insumosDao;
 		this.compra = compra;
 		this.navegador = navegador;
+		this.carrinho.logout(e -> {
+			loginController.logout();			
+		});
+
 		
 		this.carrinho.voltar(e ->{
 			navegador.navegar("COMPRA");
@@ -86,6 +90,18 @@ public class CarrinhoController {
 		});
 	}
 	
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+        this.carrinho.logout(e -> loginController.logout());
+    }
+
+    // ← adicionar método
+    public void limparCarrinho() {
+        itensCarrinho.clear();
+        carrinho.limparTabela();
+        carrinho.setLbTotal("Total: R$ 0,00");
+    }
+    
     public void adicionarItem(String produto, int qtd, double valorUnitario) {
 
         double subtotal = qtd * valorUnitario;
@@ -120,6 +136,7 @@ public class CarrinhoController {
 
         atualizarTotalCarrinho();
     }
-	
+    
+
 
 }

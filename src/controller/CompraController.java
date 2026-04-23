@@ -16,19 +16,25 @@ public class CompraController {
 
 	private Compra compra;
 	private InsumosDAO insumosDao;
-	private Insumos insumos;
+
 	private CarrinhoController carrinhoController;
 	private Carrinho carrinho;
 	private Navegador navegador;
+	private LoginController loginController;
 
-	public CompraController(Compra compra, Carrinho carrinho, Insumos insumos, Navegador navegador,
-			InsumosDAO insumosDao, CarrinhoController carrinhoController) {
+	public CompraController(Compra compra, Carrinho carrinho, Navegador navegador,
+			InsumosDAO insumosDao, CarrinhoController carrinhoController, LoginController loginController) {
 		this.compra = compra;
 		this.carrinho = carrinho;
-		this.insumos = insumos;
+
 		this.navegador = navegador;
 		this.insumosDao = insumosDao;
 		this.carrinhoController = carrinhoController;
+		this.loginController = loginController;
+		
+		this.compra.logout(e -> {
+			loginController.logout();			
+		});
 
 		carregarProdutosDoEstoque();
 		
@@ -64,7 +70,7 @@ public class CompraController {
 		    selecionado.setQuantidade(novaQuantidade);
 
 		    // Atualiza no banco
-		    insumosDao.atualizarQuantidade(selecionado.getQuantidade(), novaQuantidade);
+		    insumosDao.atualizarQuantidade(selecionado.getCodigoBarras(), novaQuantidade);
 
 		    // Atualiza limite do spinner
 		    compra.configurarLimiteEstoque(novaQuantidade);

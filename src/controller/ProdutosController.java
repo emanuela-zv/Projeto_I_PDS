@@ -58,17 +58,9 @@ public class ProdutosController {
 
 						houveAlteracao = true;
 
-						Insumos ins = new Insumos(descricao, descricao, descricao, descricao, valor, quantidade,
-								quantidade);
-						ins.setNome(nome);
-						ins.setMarca(marca);
-						ins.setFornecedora(fornecedora);
-						ins.setCodigoBarras(codigoBarras);
-						ins.setQuantidade(quantidade);
-						ins.setValor(valor);
-						ins.setDescricao(descricao);
-
+						Insumos ins = new Insumos(nome, marca, fornecedora, descricao, valor, quantidade, codigoBarras);
 						insumosDao.atualizar(ins);
+
 					}
 				}
 

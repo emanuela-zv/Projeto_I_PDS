@@ -29,39 +29,46 @@ public class Compra extends JPanel {
 	private JComboBox<Insumos> cbInsumos;
 	public JSpinner spinnerQuant;
 	private JLabel lbValorInsumo;
+	private JButton btLogout;
 
 	public Compra() {
 
-		setLayout(new MigLayout("", "[grow][][247.00,grow][grow]", "[grow][][][][][][41.00][grow]"));
+		setLayout(new MigLayout("", "[][grow][][247.00][grow]", "[][grow][][][][][][41.00][grow]"));
 		setBackground(new Color(255, 255, 224));
-
+		
+		btLogout = new JButton("Sair");
+		btLogout.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btLogout.setBackground(new Color(95, 158, 160));  
+		btLogout.setForeground(Color.black);
+		btLogout.setBorderPainted(false);
+		add(btLogout, "cell 0 0");
 		
 		JLabel lbInsumo = new JLabel("Escolha o produto");
 		lbInsumo.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbInsumo, "cell 1 1");
+		add(lbInsumo, "cell 2 2");
 
 		cbInsumos = new JComboBox<>();
 		cbInsumos.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(cbInsumos, "cell 2 1,growx");
+		add(cbInsumos, "cell 3 2,growx");
 		
 		JLabel lbQuant = new JLabel("Escolha a quantidade");
 		lbQuant.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbQuant, "cell 1 2");
+		add(lbQuant, "cell 2 3");
 
 		spinnerQuant = new JSpinner();
 		spinnerQuant.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(spinnerQuant, "cell 2 2");
+		add(spinnerQuant, "cell 3 3");
 		
 		JSpinner.NumberEditor editor = (JSpinner.NumberEditor) spinnerQuant.getEditor();
 		editor.getTextField().setEditable(false);
 		
 		JLabel lbValor = new JLabel("Valor:");
 		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValor, "cell 1 3");
+		add(lbValor, "cell 2 4");
 
 		lbValorInsumo = new JLabel("R$ 0,00");
 		lbValorInsumo.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbValorInsumo, "cell 2 3");
+		add(lbValorInsumo, "cell 3 4");
 
 		btVerDetalhes = new JButton("Ver detalhes");
 		btVerDetalhes.setForeground(new Color(128, 0, 0));
@@ -69,11 +76,11 @@ public class Compra extends JPanel {
 		btVerDetalhes.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		btVerDetalhes.setBorderPainted(false);
 		btVerDetalhes.setBackground(new Color(255, 255, 224));
-		add(btVerDetalhes, "cell 1 4,alignx center");
+		add(btVerDetalhes, "cell 2 5,alignx center");
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(95, 158, 160));
-		add(panel, "cell 1 6,grow");
+		add(panel, "cell 2 7,grow");
 
 		btAdicionar = new JButton("Adicionar ao Carrinho");
 		btAdicionar.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -83,13 +90,15 @@ public class Compra extends JPanel {
 		
 		JPanel panel2 = new JPanel();
 		panel2.setBackground(new Color(95, 158, 160));
-		add(panel2, "cell 2 6,grow");
+		add(panel2, "cell 3 7,grow");
 
 		btCarrinho = new JButton("Ir para o carrinho");
 		btCarrinho.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		btCarrinho.setBackground(new Color(95, 158, 160));
 		btCarrinho.setBorderPainted(false);
 		panel2.add(btCarrinho);
+		
+
 	}
 
 	public void configurarLimiteEstoque(int estoque) {
@@ -124,6 +133,9 @@ public class Compra extends JPanel {
 	}
 	public void detalhes(ActionListener actionListener) {
 		this.btVerDetalhes.addActionListener(actionListener);
+	}
+	public void logout(ActionListener actionListener) {
+	    this.btLogout.addActionListener(actionListener);
 	}
 	
 }

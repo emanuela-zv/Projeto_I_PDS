@@ -15,14 +15,14 @@ public class LoginController {
 	private UsuariosDAO usuariosDao;
 	private Navegador navegador;
 	private String usuarioExistente;
+	private CarrinhoController carrinhoController;
 	
 
 	public LoginController(Login login, UsuariosDAO usuariosDao, Navegador navegador) {
 		super();
 		this.login = login;
 		this.usuariosDao =usuariosDao;
-		this.navegador = navegador;
-		
+		this.navegador = navegador;	
 		
 		this.login.entrar(e -> {
 			//ação do botão	
@@ -84,16 +84,18 @@ public class LoginController {
 		login.getTfUsuario().setText("");		
 	}
 	
-//	public void logout() {
-//	    // Limpa dados do usuário (se você tiver algo assim)
-//	    login.setUsuario(null);
-//
-//	    // Limpa carrinho
-//	    carrinhoController.limparCarrinho();
-//
-//	    // Navega para tela de login
-//	    navegador.navegar("LOGIN");
-//	}
+    public void logout() {
+        if (carrinhoController != null) {
+            carrinhoController.limparCarrinho();
+        }
+        limparDados();
+        navegador.navegar("LOGIN");
+    }
+	
+	public void setCarrinhoController(CarrinhoController carrinhoController) {
+	    this.carrinhoController = carrinhoController;
+	}
+	
 	
 	
 	

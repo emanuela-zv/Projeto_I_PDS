@@ -26,10 +26,11 @@ public class Carrinho extends JPanel {
     private JButton btFinalizarCompra;
     private JLabel lbTotal;
     private int linhaSelecionada = -1;
+    private JButton btLogout;
 
     public Carrinho() {
 
-        setLayout(new MigLayout("", "[grow][][][][][][grow]", "[grow][187.00][][42.00,grow]"));
+        setLayout(new MigLayout("", "[26.00][grow][][][][][][32.00,grow]", "[][grow][187.00][][42.00,grow]"));
         setBackground(new Color(255, 255, 225));
         
 
@@ -49,7 +50,7 @@ public class Carrinho extends JPanel {
 		
 
         JScrollPane scrollPane = new JScrollPane(tabelaCarrinho);
-        add(scrollPane, "cell 1 1 5 1,grow");
+        add(scrollPane, "cell 2 2 5 1,grow");
         
         tabelaCarrinho.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
@@ -61,29 +62,36 @@ public class Carrinho extends JPanel {
         btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         btVoltar.setBackground(new Color(95, 158, 160));
         btVoltar.setBorderPainted(false);
-        add(btVoltar, "cell 1 2");
+        add(btVoltar, "cell 2 3");
 
         btRemover = new JButton("Remover");
         btRemover.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         btRemover.setBackground(new Color(95, 158, 160));
         btRemover.setBorderPainted(false);
-        add(btRemover, "cell 2 2");
+        add(btRemover, "cell 3 3");
 
         btFinalizarCompra = new JButton("Finalizar Compra");
         btFinalizarCompra.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         btFinalizarCompra.setBackground(new Color(95, 158, 160));
         btFinalizarCompra.setBorderPainted(false);
-        add(btFinalizarCompra, "cell 3 2");
+        add(btFinalizarCompra, "cell 4 3");
 
         btNota = new JButton("Emitir nota fiscal");
         btNota.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         btNota.setBackground(new Color(95, 158, 160));
         btNota.setBorderPainted(false);
-        add(btNota, "cell 4 2");
+        add(btNota, "cell 5 3");
+        
+		btLogout = new JButton("Sair");
+		btLogout.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btLogout.setBackground(new Color(95, 158, 160));  
+		btLogout.setForeground(Color.black);
+		btLogout.setBorderPainted(false);
+		add(btLogout, "cell 0 0");
 
         lbTotal = new JLabel("Total: R$ 0,00");
         lbTotal.setFont(new Font("Times New Roman", Font.BOLD, 22));
-        add(lbTotal, "cell 5 2");
+        add(lbTotal, "cell 6 3");
     }
     
     public void notaFiscal(ActionListener actionListener) {
@@ -97,6 +105,10 @@ public class Carrinho extends JPanel {
     }
     public void voltar(ActionListener actionListener) {
     	this.btVoltar.addActionListener(actionListener);
+    }
+    
+    public void logout(ActionListener actionListener) {
+        this.btLogout.addActionListener(actionListener);
     }
     
     public DefaultTableModel getModelo() {

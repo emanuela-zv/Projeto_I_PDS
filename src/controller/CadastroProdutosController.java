@@ -10,15 +10,22 @@ public class CadastroProdutosController {
 	private CadastroInsumos cadastroInsumos;
 	private CadastroProdutos cadastroProdutos;
 	private Produtos produtos;
+	private LoginController loginController;
 	
 	
 	public CadastroProdutosController(Navegador navegador, CadastroInsumos cadastroInsumos,
-			CadastroProdutos cadastroProdutos, Produtos produtos) {
+			CadastroProdutos cadastroProdutos, Produtos produtos, LoginController loginController) {
 		super();
 		this.navegador = navegador;
 		this.cadastroInsumos = cadastroInsumos;
 		this.cadastroProdutos = cadastroProdutos;
 		this.produtos = produtos;
+		this.loginController = loginController;
+		
+		this.cadastroProdutos.logout(e -> {
+			loginController.logout();			
+		});
+
 		
 		this.cadastroProdutos.cadastrar( e -> {
 			this.navegador.navegar("CADASTRO_INSUMOS");
