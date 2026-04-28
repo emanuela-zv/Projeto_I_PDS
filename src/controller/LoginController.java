@@ -16,7 +16,7 @@ public class LoginController {
 	private Navegador navegador;
 	private String usuarioExistente;
 	private CarrinhoController carrinhoController;
-	
+	private Usuarios usuarioLogado;
 
 	public LoginController(Login login, UsuariosDAO usuariosDao, Navegador navegador) {
 		super();
@@ -63,12 +63,17 @@ public class LoginController {
 			
 			if (usuarioEncontrado != null) {
 
-			    usuarioExistente = usuarioEncontrado.getNome();
+			    this.usuarioLogado = usuarioEncontrado; 
 
 			    if (usuarioEncontrado.isAdm()) {
 			        this.navegador.navegar("CADASTRO_PRODUTOS");
 			    } else {
 			        this.navegador.navegar("COMPRA");
+			    }
+			    
+
+			    if (carrinhoController != null) {
+			        carrinhoController.setUsuario(usuarioLogado); // 👈 AQUI
 			    }
 			}
 			else {
@@ -95,6 +100,16 @@ public class LoginController {
 	public void setCarrinhoController(CarrinhoController carrinhoController) {
 	    this.carrinhoController = carrinhoController;
 	}
+
+	public Usuarios getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuarios usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+	
+	
 	
 	
 	

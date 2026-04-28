@@ -33,7 +33,6 @@ public class Produtos extends JPanel {
             new Object[]{"Nome", "Marca", "Fornecedora", "Código", "Quantidade", "Valor", "Descrição"},
             0
         ) {
-            @Override
             public boolean isCellEditable(int row, int column) {
                 return editavel;
             }
@@ -114,7 +113,31 @@ public class Produtos extends JPanel {
         return linhaSelecionada;
     }
 
-    public void voltar(ActionListener actionListener) {
+    public JButton getBtSalvar() {
+		return btSalvar;
+	}
+
+	public void setBtSalvar(JButton btSalvar) {
+		this.btSalvar = btSalvar;
+	}
+
+	public JButton getBtVoltar() {
+		return btVoltar;
+	}
+
+	public void setBtVoltar(JButton btVoltar) {
+		this.btVoltar = btVoltar;
+	}
+
+	public JButton getBtExcluir() {
+		return btExcluir;
+	}
+
+	public void setBtExcluir(JButton btExcluir) {
+		this.btExcluir = btExcluir;
+	}
+
+	public void voltar(ActionListener actionListener) {
         this.btVoltar.addActionListener(actionListener);
     }
 
@@ -139,7 +162,6 @@ public class Produtos extends JPanel {
 
 	public void setModoExclusao(boolean valor) {
         this.modoExclusao = valor;
-
             linhaSelecionada = -1;
             tabelaInsumos.clearSelection();
     }

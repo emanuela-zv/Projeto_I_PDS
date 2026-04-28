@@ -136,6 +136,10 @@ public class CarrinhoController {
 
         atualizarTotalCarrinho();
     }
+
+    public void setUsuario(Usuarios usuarios) {
+        this.usuarios = usuarios;
+    }
     
 
 

@@ -32,15 +32,21 @@ public class CadastroProdutosController {
 		});
 		
 		this.cadastroProdutos.visualizar(e -> {
+			this.produtos.getBtSalvar().setEnabled(false);
+			this.produtos.getBtExcluir().setEnabled(false);
 			this.navegador.navegar("PRODUTOS");
 		});
 		
 		this.cadastroProdutos.editar(e -> {
 			this.navegador.navegar("PRODUTOS");
+			this.produtos.getBtExcluir().setEnabled(false);
+			this.produtos.getBtSalvar().setEnabled(true);
 			produtos.setModoEdicao(true);
 		});
 		
 		this.cadastroProdutos.remover(e -> {
+			this.produtos.getBtSalvar().setEnabled(false);
+			this.produtos.getBtExcluir().setEnabled(true);
 			produtos.setModoExclusao(true);
 			this.navegador.navegar("PRODUTOS");
 			

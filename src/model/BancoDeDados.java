@@ -8,7 +8,7 @@ public class BancoDeDados {
 
     private static final String URL = "jdbc:mysql://localhost:3306/supermercado"; // <-- substitua '/cadastro_db' pelo seu banco de dados
     private static final String USUARIO = "root"; // <-- Substitua pelo seu usuário
-    private static final String SENHA = "admin";   // <-- Substitua pela sua senha
+    private static final String SENHA = "M1a2n3u4";   // <-- Substitua pela sua senha
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     // Método para obter uma conexão com o banco de dados

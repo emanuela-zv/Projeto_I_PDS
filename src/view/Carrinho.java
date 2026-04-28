@@ -48,11 +48,14 @@ public class Carrinho extends JPanel {
 		header.setForeground(new Color(0,0,0));
 		header.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		
+		tabelaCarrinho.getTableHeader().setReorderingAllowed(false);
+		tabelaCarrinho.getTableHeader().setResizingAllowed(false);
 
         JScrollPane scrollPane = new JScrollPane(tabelaCarrinho);
         add(scrollPane, "cell 2 2 5 1,grow");
         
         tabelaCarrinho.getSelectionModel().addListSelectionListener(e -> {
+        	
             if (!e.getValueIsAdjusting()) {
                 linhaSelecionada = tabelaCarrinho.getSelectedRow();
             }
