@@ -21,6 +21,6 @@ fornecedora VARCHAR (100) NOT NULL,
 descricao VARCHAR (500) NOT NULL,
 valor DECIMAL (10,2) NOT NULL,
 quantidade INT NOT NULL,
-codBarras BIGINT PRIMARY KEY NOT NULL
+codigoBarras BIGINT PRIMARY KEY NOT NULL
 
 );
