@@ -32,7 +32,7 @@ public class CadastroInsumos extends JPanel {
 	 */
 	public CadastroInsumos() {
 		setBackground(new Color(255, 255, 224));
-		setLayout(new MigLayout("", "[143.00,grow][212.00][447.00][grow]", "[grow][][][][][][][][][][][][grow]"));
+		setLayout(new MigLayout("", "[143.00,grow][231.00][364.00][grow]", "[grow][][][][][][][][][][][][grow]"));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
 		

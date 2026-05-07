@@ -8,21 +8,24 @@ import model.Usuarios;
 import model.UsuariosDAO;
 import view.CadastroUsuario;
 import view.Login;
+import view.TelaPrincipal;
 
 public class LoginController {
 	
 	private Login login;
 	private UsuariosDAO usuariosDao;
 	private Navegador navegador;
+	private TelaPrincipal telaPrincipal;
 	private String usuarioExistente;
 	private CarrinhoController carrinhoController;
-	private Usuarios usuarioLogado;
+	private static Usuarios usuarioLogado;
 
-	public LoginController(Login login, UsuariosDAO usuariosDao, Navegador navegador) {
+	public LoginController(Login login, UsuariosDAO usuariosDao, Navegador navegador, TelaPrincipal tela) {
 		super();
 		this.login = login;
 		this.usuariosDao =usuariosDao;
 		this.navegador = navegador;	
+		this.telaPrincipal = tela;
 		
 		this.login.entrar(e -> {
 			//ação do botão	
@@ -70,11 +73,7 @@ public class LoginController {
 			    } else {
 			        this.navegador.navegar("COMPRA");
 			    }
-			    
 
-			    if (carrinhoController != null) {
-			        carrinhoController.setUsuario(usuarioLogado); // 👈 AQUI
-			    }
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos! \nVerfique as informações.", "Informação", 1);
@@ -90,11 +89,26 @@ public class LoginController {
 	}
 	
     public void logout() {
+    	
+	    int confirm = JOptionPane.showConfirmDialog(
+		        telaPrincipal,
+		        "Deseja sair da conta?",
+		        "Sair",
+		        JOptionPane.YES_NO_OPTION
+		        
+		    );
+		    if (confirm == JOptionPane.YES_OPTION) {
+		        LoginController.usuarioLogado = null;
+		        navegador.navegar("LOGIN");
+		     		    
+		    }
+		    
         if (carrinhoController != null) {
             carrinhoController.limparCarrinho();
         }
+        
         limparDados();
-        navegador.navegar("LOGIN");
+        
     }
 	
 	public void setCarrinhoController(CarrinhoController carrinhoController) {

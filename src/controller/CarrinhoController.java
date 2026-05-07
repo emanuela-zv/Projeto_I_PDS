@@ -77,16 +77,33 @@ public class CarrinhoController {
 		        total += subtotal;
 		    }
 
-
-		    String Nota = 
-		        "Cliente: " + usuarios.getNome() +
-		        "\nCPF: " + usuarios.getCpf() +
-		        "\nProdutos:\n" + listaProdutos +
-		        "\nTotal: R$ " + String.format("%.2f", total);
-
-
-		    JOptionPane.showMessageDialog(null, Nota, "Nota Fiscal", JOptionPane.INFORMATION_MESSAGE);
-			
+		    String Nota = "";
+		    
+		    try {		    	
+			    Nota = 
+				        "Cliente: " + usuarios.getNome() +
+				        "\nCPF: " + usuarios.getCpf() +
+				        "\nProdutos:\n" + listaProdutos +
+				        "\nTotal: R$ " + String.format("%.2f", total);
+		    	
+		    } catch (NullPointerException eNull){
+		    	
+		    	JOptionPane.showMessageDialog(null, "Cliente ou CPF não está disponível.");
+		 
+				    Nota = 
+					        "Cliente: "  +
+					        "\nCPF: " + 
+					        "\nProdutos:\n" + listaProdutos +
+					        "\nTotal: R$ " + String.format("%.2f", total);
+		    		
+		    	
+		    
+		    } finally {
+			    
+		    	JOptionPane.showMessageDialog(null, Nota, "Nota Fiscal", JOptionPane.INFORMATION_MESSAGE);
+				
+		    }
+		    
 		});
 	}
 	
@@ -95,7 +112,7 @@ public class CarrinhoController {
         this.carrinho.logout(e -> loginController.logout());
     }
 
-    // ← adicionar método
+ 
     public void limparCarrinho() {
         itensCarrinho.clear();
         carrinho.limparTabela();

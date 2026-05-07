@@ -43,7 +43,7 @@ public class Main {
         Navegador navegador = new Navegador(login, telaPrincipal, cadastroUsuario, cadastroProdutos, cadastroInsumos);
 
         CarrinhoController carrinhoController = new CarrinhoController(carrinho, insumosDao, compra, navegador);
-        LoginController loginController = new LoginController(login, usuariosDao, navegador);
+        LoginController loginController = new LoginController(login, usuariosDao, navegador, telaPrincipal);
 
         loginController.setCarrinhoController(carrinhoController);
         carrinhoController.setLoginController(loginController);
@@ -68,7 +68,7 @@ public class Main {
 
 		
 		telaPrincipal.setVisible(true);
-		navegador.navegar("LOGIN");
+		navegador.navegar("CARRINHO");
 		
 	}
 

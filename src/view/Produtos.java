@@ -17,7 +17,6 @@ public class Produtos extends JPanel {
     private JButton btSalvar;
     private JButton btVoltar;
     private DefaultTableModel modelo;
-    private JPanel panel_1_2;
     private JButton btExcluir;
     private boolean editavel = false;
     private boolean valor = false;
@@ -43,10 +42,6 @@ public class Produtos extends JPanel {
 
         JScrollPane scrollPane = new JScrollPane(tabelaInsumos);
         add(scrollPane, "cell 1 1 4 1,growx,aligny center");
-
-        JPanel panel_1 = new JPanel();
-        panel_1.setBackground(new Color(95, 158, 160));
-        add(panel_1, "cell 1 2,grow");
         
         tabelaInsumos.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         tabelaInsumos.setRowHeight(28);
@@ -56,32 +51,18 @@ public class Produtos extends JPanel {
         tabelaInsumos.getTableHeader().setBackground(new Color(95, 158, 160));
         tabelaInsumos.getTableHeader().setForeground(Color.BLACK);
         tabelaInsumos.getTableHeader().setFont(new Font("Times New Roman", Font.PLAIN, 25));
-
-        btVoltar = new JButton("Voltar");
-        btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        btVoltar.setBorderPainted(false);
-        btVoltar.setBackground(new Color(95, 158, 160));
-        panel_1.add(btVoltar);
         
-        JPanel panel_1_1 = new JPanel();
-        panel_1_1.setBackground(new Color(95, 158, 160));
-        add(panel_1_1, "cell 3 2,grow");
-                
+                btVoltar = new JButton("Voltar");
+                add(btVoltar, "cell 1 2,grow");
+                btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+                btVoltar.setBorderPainted(false);
+                btVoltar.setBackground(new Color(95, 158, 160));
+        
         btSalvar = new JButton("Salvar edições");
+        add(btSalvar, "cell 3 2,grow");
         btSalvar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
         btSalvar.setBorderPainted(false);
         btSalvar.setBackground(new Color(95, 158, 160));
-        panel_1_1.add(btSalvar);
-        
-        panel_1_2 = new JPanel();
-        panel_1_2.setBackground(new Color(95, 158, 160));
-        add(panel_1_2, "cell 4 2,grow");
-        
-        btExcluir = new JButton("Excluir");
-        btExcluir.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        btExcluir.setBorderPainted(false);
-        btExcluir.setBackground(new Color(95, 158, 160));
-        panel_1_2.add(btExcluir);
 
         tabelaInsumos.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && modoExclusao) {
@@ -90,6 +71,12 @@ public class Produtos extends JPanel {
         });
         
         tabelaInsumos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
+        btExcluir = new JButton("Excluir");
+        add(btExcluir, "cell 4 2,grow");
+        btExcluir.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        btExcluir.setBorderPainted(false);
+        btExcluir.setBackground(new Color(95, 158, 160));
         tabelaInsumos.getColumnModel().getColumn(0).setPreferredWidth(120);
         tabelaInsumos.getColumnModel().getColumn(1).setPreferredWidth(120);
         tabelaInsumos.getColumnModel().getColumn(2).setPreferredWidth(140);

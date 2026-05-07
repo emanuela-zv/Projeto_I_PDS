@@ -30,6 +30,7 @@ public class CadastroInsumosController {
 		});
 
 		this.cadastroInsumos.cadastrar(e -> {
+			
 			try {
 				if (cadastroInsumos.getTfCodigoBarras().getText().isEmpty()
 						|| cadastroInsumos.getTfNome().getText().isEmpty()
@@ -60,7 +61,7 @@ public class CadastroInsumosController {
 					limparDados();
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "Código de barras já cadastrado! \n Caso queira utiliz-a-lo, você deve voltar e clicar em 'editar'", 
+					JOptionPane.showMessageDialog(null, "Código de barras já cadastrado! \n Caso queira utilizá-lo, você deve voltar e clicar em 'editar'", 
 							"Atenção", 2);
 				}
 
