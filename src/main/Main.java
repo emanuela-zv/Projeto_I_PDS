@@ -71,7 +71,7 @@ public class Main {
 		navegador.adicionarPainel("CARRINHO", carrinho);
 
 		telaPrincipal.setVisible(true);
-		navegador.navegar("LOGIN	");
+		navegador.navegar("LOGIN");
 
 	}
 

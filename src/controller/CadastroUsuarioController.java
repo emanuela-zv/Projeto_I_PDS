@@ -65,32 +65,61 @@ public class CadastroUsuarioController {
 				return;
 			}
 
-			Usuarios novoUsuario = new Usuarios(cpf, nome, usuario, cadastroUsuario.getRbAdm().isSelected());
-			usuariosDao.adicionarDados(novoUsuario);
-			JOptionPane.showMessageDialog(null, "O usuário foi cadastrado!", "Sucesso",
-					JOptionPane.INFORMATION_MESSAGE);
-			navegador.navegar("LOGIN");
-			limparDados();
+			try {
+				Usuarios novoUsuario = new Usuarios(cpf, nome, usuario, cadastroUsuario.getRbAdm().isSelected());
+				usuariosDao.adicionarDados(novoUsuario);
+				JOptionPane.showMessageDialog(null, "O usuário foi cadastrado!", "Sucesso",
+						JOptionPane.INFORMATION_MESSAGE);
+				navegador.navegar("LOGIN");
+				limparDados();
+
+			} catch (Exception ex) {
+
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + ex.getMessage(), "Erro",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
 		});
 	}
 
 	private boolean verificarCpf(String cpfDigitado) {
-		List<Usuarios> listaUsuarios = usuariosDao.listarUsuarios();
-		for (Usuarios u : listaUsuarios) {
-			if (u.getCpf().equals(cpfDigitado)) {
-				return true;
+		
+		try {
+			
+			List<Usuarios> listaUsuarios = usuariosDao.listarUsuarios();
+			for (Usuarios u : listaUsuarios) {
+				if (u.getCpf().equals(cpfDigitado)) {
+					return true;
+				}
 			}
-		}
+			
+	    } catch (Exception ex) {
+	        JOptionPane.showMessageDialog(null,
+	                "Erro ao verificar CPF: " + ex.getMessage(),
+	                "Erro",
+	                JOptionPane.ERROR_MESSAGE);
+	    }
+
 		return false;
 	}
 
 	private boolean verificarUsuario(String usuarioDigitado) {
-		List<Usuarios> listaUsuarios = usuariosDao.listarUsuarios();
-		for (Usuarios u : listaUsuarios) {
-			if (u.getUsuario().equals(usuarioDigitado)) {
-				return true;
+		
+		try {
+			List<Usuarios> listaUsuarios = usuariosDao.listarUsuarios();
+			for (Usuarios u : listaUsuarios) {
+				if (u.getUsuario().equals(usuarioDigitado)) {
+					return true;
+				}
 			}
-		}
+			
+	    } catch (Exception ex) {
+	        JOptionPane.showMessageDialog(null,
+	                "Erro ao verificar usuario: " + ex.getMessage(),
+	                "Erro",
+	                JOptionPane.ERROR_MESSAGE);
+	    }
+
 		return false;
 	}
 

@@ -76,6 +76,13 @@ public class ProdutosController {
 				}
 
 				carregarTabela();
+				
+		    } catch (NumberFormatException ex) {
+
+		        JOptionPane.showMessageDialog(null,
+		                "Erro de formato numérico na tabela!",
+		                "Erro",
+		                JOptionPane.ERROR_MESSAGE);
 
 			} catch (Exception ex) {
 				ex.printStackTrace();

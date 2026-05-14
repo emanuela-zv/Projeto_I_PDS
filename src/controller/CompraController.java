@@ -50,10 +50,11 @@ public class CompraController {
 		
 		this.compra.adicionar(e -> {
 			
-			var selecionado = (model.Insumos) compra.getCbInsumos().getSelectedItem();
+			try {
+		        Insumos selecionado = (Insumos) compra.getCbInsumos().getSelectedItem();
 		    int qtd = (int) compra.spinnerQuant.getValue();
 
-		    if (selecionado == null) return;
+		    if (selecionado == null) { return;}
 
 		    carrinhoController.adicionarItem(
 		            selecionado.getNome(),
@@ -79,6 +80,14 @@ public class CompraController {
 		    
 		    selecionado.setQuantidade(novaQuantidade);
 		    carregarProdutosDoEstoque();
+		    
+		    } catch (Exception ex) {
+
+		        JOptionPane.showMessageDialog(compra,
+		                "Erro ao adicionar produto: " + ex.getMessage(),
+		                "Erro",
+		                JOptionPane.ERROR_MESSAGE);
+		    }
 		    
 		});
 

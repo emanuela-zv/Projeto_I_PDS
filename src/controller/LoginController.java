@@ -43,6 +43,7 @@ public class LoginController {
 
 	private void verificarUsuario() {
 
+		try{ 
 		String cpfDigitado = login.getTfCpf().getText().replace(" ", "").trim();
 		List<Usuarios> usuarios = usuariosDao.listarUsuarios();
 
@@ -70,11 +71,13 @@ public class LoginController {
 			if (usuarioEncontrado != null) {
 
 				this.usuarioLogado = usuarioEncontrado;
-
+			    
 				if (usuarioEncontrado.isAdm()) {
 					this.navegador.navegar("CADASTRO_PRODUTOS");
+					
 				} else {
 					this.navegador.navegar("COMPRA");
+					carrinhoController.setUsuario(usuarioEncontrado);
 					compraController.carregarProdutosDoEstoque();
 				}
 
@@ -84,6 +87,16 @@ public class LoginController {
 
 			}
 		}
+		
+	    } catch (NullPointerException ex) {
+
+	        JOptionPane.showMessageDialog(
+	                null,
+	                "Erro: algum campo ou componente não foi carregado corretamente.",
+	                "Erro",
+	                JOptionPane.ERROR_MESSAGE
+	        );
+	    }
 
 	}
 

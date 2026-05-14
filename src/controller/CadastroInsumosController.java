@@ -73,6 +73,7 @@ public class CadastroInsumosController {
 
 	private boolean verificarCodigoBarras(String codigoBarrasDigitado) {
 		List<Insumos> listaInsumos = insumosDao.listarInsumos();
+		
 		for (Insumos i : listaInsumos) {
 			if (String.valueOf(i.getCodigoBarras()).equals(codigoBarrasDigitado)) {
 				return true;
