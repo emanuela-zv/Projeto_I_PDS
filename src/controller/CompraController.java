@@ -55,11 +55,6 @@ public class CompraController {
 
 		    if (selecionado == null) return;
 
-		    if (qtd > selecionado.getQuantidade()) {
-		        JOptionPane.showMessageDialog(compra, "Estoque insuficiente!");
-		        return;
-		    }
-
 		    carrinhoController.adicionarItem(
 		            selecionado.getNome(),
 		            qtd,
@@ -99,7 +94,7 @@ public class CompraController {
 		atualizarLogicaPorProduto();
 	}
 
-	private void carregarProdutosDoEstoque() {
+	public void carregarProdutosDoEstoque() {
 		List<Insumos> lista = insumosDao.listarInsumos();
 		compra.getCbInsumos().removeAllItems();
 		for (Insumos i : lista) {

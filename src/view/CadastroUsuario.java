@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 public class CadastroUsuario extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -68,6 +71,43 @@ public class CadastroUsuario extends JPanel {
 		tfCpf.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfCpf.setColumns(10);
 		add(tfCpf, "cell 2 5,growx");
+		
+		tfCpf.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+
+		        // permite apenas números e backspace
+		        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+		            e.consume();
+		            return;
+		        }
+
+		        // conta apenas números reais (ignora espaços)
+		        String cpf = tfCpf.getText().replace(" ", "");
+
+		        // limite de 11 dígitos
+		        if (Character.isDigit(c) && cpf.length() >= 11) {
+		            e.consume();
+		        }
+		    }
+
+		    @Override
+		    public void keyReleased(KeyEvent e) {
+		        String cpf = tfCpf.getText().replace(" ", "");
+
+		        StringBuilder formatado = new StringBuilder();
+
+		        for (int i = 0; i < cpf.length(); i++) {
+		            if (i > 0 && i % 3 == 0) {
+		                formatado.append(" ");
+		            }
+		            formatado.append(cpf.charAt(i));
+		        }
+
+		        tfCpf.setText(formatado.toString());
+		    }
+		});
 				
 		rbCliente = new JRadioButton("Sou cliente");
 		rbCliente.setBackground(new Color(255, 255, 224));

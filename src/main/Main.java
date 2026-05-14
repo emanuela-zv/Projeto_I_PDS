@@ -24,52 +24,55 @@ import view.TelaPrincipal;
 public class Main {
 
 	public static void main(String[] args) {
+
+		TelaPrincipal telaPrincipal = new TelaPrincipal();
+		CadastroInsumos cadastroInsumos = new CadastroInsumos();
+		CadastroProdutos cadastroProdutos = new CadastroProdutos();
+		CadastroUsuario cadastroUsuario = new CadastroUsuario();
+		Produtos produtos = new Produtos();
+		Compra compra = new Compra();
+		Login login = new Login();
+		Carrinho carrinho = new Carrinho();
+
+		// DAOs e entidades
+		UsuariosDAO usuariosDao = new UsuariosDAO();
+		InsumosDAO insumosDao = new InsumosDAO();
+
+		// Navegador
+		Navegador navegador = new Navegador(login, telaPrincipal, cadastroUsuario, cadastroProdutos, cadastroInsumos);
+
+		//Controllers
 		
-		
-        TelaPrincipal telaPrincipal = new TelaPrincipal();
-        CadastroInsumos cadastroInsumos = new CadastroInsumos();
-        CadastroProdutos cadastroProdutos = new CadastroProdutos();
-        CadastroUsuario cadastroUsuario = new CadastroUsuario();
-        Produtos produtos = new Produtos();
-        Compra compra = new Compra();
-        Login login = new Login();
-        Carrinho carrinho = new Carrinho();
+		CarrinhoController carrinhoController = new CarrinhoController(carrinho, insumosDao, compra, navegador);
+		LoginController loginController = new LoginController(login, usuariosDao, navegador, telaPrincipal);
+		CompraController compraController = new CompraController(compra, carrinho, navegador, insumosDao, carrinhoController, loginController);
 
-        // DAOs e entidades
-        UsuariosDAO usuariosDao = new UsuariosDAO();
-        InsumosDAO insumosDao = new InsumosDAO();
+		loginController.setCompraController(compraController);
+		loginController.setCarrinhoController(carrinhoController);
+		carrinhoController.setLoginController(loginController);
 
-        // Navegador
-        Navegador navegador = new Navegador(login, telaPrincipal, cadastroUsuario, cadastroProdutos, cadastroInsumos);
+		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastroUsuario, navegador,
+				usuariosDao);
+		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController(navegador,
+				cadastroInsumos, cadastroProdutos, produtos, loginController);
+		ProdutosController produtosController = new ProdutosController(produtos, insumosDao, navegador,
+				cadastroProdutos);
+		CadastroInsumosController cadastroInsumosController = new CadastroInsumosController(cadastroInsumos, navegador,
+				insumosDao, produtos, produtosController);
 
-        CarrinhoController carrinhoController = new CarrinhoController(carrinho, insumosDao, compra, navegador);
-        LoginController loginController = new LoginController(login, usuariosDao, navegador, telaPrincipal);
+		// Painéis
 
-        loginController.setCarrinhoController(carrinhoController);
-        carrinhoController.setLoginController(loginController);
-
-        
-        CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastroUsuario, navegador, usuariosDao);
-        CadastroProdutosController cadastroProdutosController = new CadastroProdutosController(navegador, cadastroInsumos, cadastroProdutos, produtos, loginController);
-        ProdutosController produtosController = new ProdutosController(produtos, insumosDao, navegador, cadastroProdutos);
-        CadastroInsumosController cadastroInsumosController = new CadastroInsumosController(cadastroInsumos, navegador, insumosDao, produtos, produtosController);
-        CompraController compraController = new CompraController(compra, carrinho, navegador, insumosDao, carrinhoController, loginController);
-        
-
-        // Painéis
-		
 		navegador.adicionarPainel("LOGIN", login);
 		navegador.adicionarPainel("CADASTRO_INSUMOS", cadastroInsumos);
 		navegador.adicionarPainel("CADASTRO_PRODUTOS", cadastroProdutos);
 		navegador.adicionarPainel("CADASTRO_USUARIO", cadastroUsuario);
-		navegador.adicionarPainel("COMPRA", compra);	
+		navegador.adicionarPainel("COMPRA", compra);
 		navegador.adicionarPainel("PRODUTOS", produtos);
 		navegador.adicionarPainel("CARRINHO", carrinho);
 
-		
 		telaPrincipal.setVisible(true);
-		navegador.navegar("CARRINHO");
-		
+		navegador.navegar("LOGIN	");
+
 	}
 
 }

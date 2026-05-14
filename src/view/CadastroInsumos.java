@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 public class CadastroInsumos extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -76,14 +79,38 @@ public class CadastroInsumos extends JPanel {
 		tfCodigoBarras.setColumns(10);
 		add(tfCodigoBarras, "cell 2 6,growx");
 		
+		tfCodigoBarras.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+
+		        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+		            e.consume();
+		        }
+		    }
+		});
+		
 		JLabel lbQuantidade = new JLabel("Quantidade");
 		lbQuantidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbQuantidade, "cell 1 7,alignx left");
 		
+
 		tfQuantidade = new JTextField();
 		tfQuantidade.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfQuantidade.setColumns(10);
 		add(tfQuantidade, "cell 2 7,growx");
+		
+		tfQuantidade.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+
+		        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+		            e.consume();
+		        }
+		    }
+		});
+		
 		
 		JLabel lbValor = new JLabel("Valor (da unidade) ");
 		lbValor.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -93,6 +120,32 @@ public class CadastroInsumos extends JPanel {
 		tfValor.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfValor.setColumns(10);
 		add(tfValor, "cell 2 8,growx");
+		
+		tfValor.addKeyListener(new KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		        char c = e.getKeyChar();
+
+		        // impede segunda vírgula
+		        if (c == ',' && tfValor.getText().contains(",")) {
+		            e.consume();
+		        }
+
+		        // impede segundo ponto
+		        if (c == '.' && tfValor.getText().contains(".")) {
+		            e.consume();
+		        }
+
+		        // impede misturar vírgula e ponto
+		        if (c == ',' && tfValor.getText().contains(".")) {
+		            e.consume();
+		        }
+
+		        if (c == '.' && tfValor.getText().contains(",")) {
+		            e.consume();
+		        }
+		    }
+		});
 		
 		JLabel lbDescricao = new JLabel("Descrição");
 		lbDescricao.setFont(new Font("Times New Roman", Font.PLAIN, 25));

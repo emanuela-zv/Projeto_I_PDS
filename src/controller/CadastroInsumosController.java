@@ -50,7 +50,7 @@ public class CadastroInsumosController {
 							cadastroInsumos.getTfMarca().getText(),
 							cadastroInsumos.getTfFornecedora().getText(), 
 							cadastroInsumos.getTfDescricao().getText(),
-							Float.parseFloat(cadastroInsumos.getTfValor().getText()),
+							Float.parseFloat(cadastroInsumos.getTfValor().getText().replace(",", ".")),
 							Integer.parseInt(cadastroInsumos.getTfQuantidade().getText()),
 							Integer.parseInt(cadastroInsumos.getTfCodigoBarras().getText()));
 

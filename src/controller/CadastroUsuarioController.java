@@ -35,8 +35,21 @@ public class CadastroUsuarioController {
 				return;
 			}
 
-			String cpf = cadastroUsuario.getTfCpf().getText();
-			String usuario = cadastroUsuario.getTfUsuario().getText();
+			String nome = cadastroUsuario.getTfNome().getText().trim();
+
+			if (!nome.matches("^[A-Za-zÀ-ÿ]+\\s+[A-Za-zÀ-ÿ]{2,}.*$")) {
+				JOptionPane.showMessageDialog(null, "Digite nome e sobrenome.", "Informação",
+						JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+
+			String cpf = cadastroUsuario.getTfCpf().getText().replace(" ", "");
+
+			if (!cpf.matches("\\d{11}")) {
+				JOptionPane.showMessageDialog(null, "CPF inválido! (Digite apenas os 11 números!)", "Informação",
+						JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
 
 			if (verificarCpf(cpf)) {
 				JOptionPane.showMessageDialog(null, "Este CPF já está em uso!", "Informação",
@@ -44,17 +57,16 @@ public class CadastroUsuarioController {
 				return;
 			}
 
+			String usuario = cadastroUsuario.getTfUsuario().getText().trim();
+
 			if (verificarUsuario(usuario)) {
 				JOptionPane.showMessageDialog(null, "Este usuário já está em uso!", "Informação",
 						JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 
-			Usuarios novoUsuario = new Usuarios(cpf, cadastroUsuario.getTfNome().getText(), usuario,
-					cadastroUsuario.getRbAdm().isSelected());
-
+			Usuarios novoUsuario = new Usuarios(cpf, nome, usuario, cadastroUsuario.getRbAdm().isSelected());
 			usuariosDao.adicionarDados(novoUsuario);
-
 			JOptionPane.showMessageDialog(null, "O usuário foi cadastrado!", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
 			navegador.navegar("LOGIN");
