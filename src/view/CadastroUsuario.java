@@ -7,8 +7,10 @@ import java.awt.Dimension;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
@@ -29,6 +31,7 @@ public class CadastroUsuario extends JPanel {
 	private JRadioButton rbCliente;
 	private JRadioButton rbAdm;
 	private ButtonGroup identificador;
+	private JLabel logo;
 	
 	
 	/**
@@ -36,41 +39,55 @@ public class CadastroUsuario extends JPanel {
 	 */
 	public CadastroUsuario() {
 		setBackground(new Color(255, 255, 224));
-		setLayout(new MigLayout("", "[grow][165.00,sizegroup tamanhoigual][313.00,sizegroup tamanhoigual][grow]", "[grow][][][][][][][][][grow]"));
+		setLayout(new MigLayout("", "[grow][165.00,sizegroup tamanhoigual][313.00,sizegroup tamanhoigual][grow]", "[grow][][][][][][][][][][grow]"));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
+		
+		logo = new JLabel("");
+		add(logo, "cell 1 1 2 1,alignx center,aligny center");
+		
+		ImageIcon iconLogo = new ImageIcon(
+		        Login.class.getResource("/imagens/Semblante.png")
+		);
+
+		Image imgLogo= iconLogo.getImage().getScaledInstance(
+		        230,
+		        230,
+		        Image.SCALE_SMOOTH
+		);
+		logo.setIcon(new ImageIcon(imgLogo));
 		
 		
 		JLabel lbCadastroUsuario = new JLabel("Cadastro de usuário");
 		lbCadastroUsuario.setFont(new Font("Times New Roman", Font.BOLD, 35));
-		add(lbCadastroUsuario, "cell 1 1 2 1,alignx center");
+		add(lbCadastroUsuario, "cell 1 2 2 1,alignx center");
 		
 		JLabel lbNome = new JLabel("Nome completo");
 		lbNome.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbNome, "cell 1 3");
+		add(lbNome, "cell 1 4");
 		
 		tfNome = new JTextField();
 		tfNome.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		add(tfNome, "cell 2 3,growx");
+		add(tfNome, "cell 2 4,growx");
 		tfNome.setColumns(10);
 		
 		JLabel lbUsuario = new JLabel("Usuário");
 		lbUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbUsuario, "cell 1 4,alignx left");
+		add(lbUsuario, "cell 1 5,alignx left");
 		
 		tfUsuario = new JTextField();
 		tfUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfUsuario.setColumns(10);
-		add(tfUsuario, "cell 2 4,growx");
+		add(tfUsuario, "cell 2 5,growx");
 		
 		JLabel lbCpf = new JLabel("CPF");
 		lbCpf.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(lbCpf, "cell 1 5,alignx left");
+		add(lbCpf, "cell 1 6,alignx left");
 		
 		tfCpf = new JTextField();
 		tfCpf.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfCpf.setColumns(10);
-		add(tfCpf, "cell 2 5,growx");
+		add(tfCpf, "cell 2 6,growx");
 		
 		tfCpf.addKeyListener(new KeyAdapter() {
 		    @Override
@@ -112,16 +129,16 @@ public class CadastroUsuario extends JPanel {
 		rbCliente = new JRadioButton("Sou cliente");
 		rbCliente.setBackground(new Color(255, 255, 224));
 		rbCliente.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(rbCliente, "cell 1 6,alignx left");
+		add(rbCliente, "cell 1 7,alignx left");
 		
 		rbAdm = new JRadioButton("Sou administrador");
 		rbAdm.setBackground(new Color(255, 255, 224));
 		rbAdm.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		add(rbAdm, "cell 2 6,alignx center");
+		add(rbAdm, "cell 2 7,alignx center");
 				
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(95, 158, 160));
-		add(panel, "cell 1 8,grow");
+		add(panel, "cell 1 9,grow");
 		
 		btVoltar = new JButton("Voltar");
 		btVoltar.setBackground(new Color(95, 158, 160));
@@ -131,7 +148,7 @@ public class CadastroUsuario extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(95, 158, 160));
-		add(panel_1, "cell 2 8,grow");
+		add(panel_1, "cell 2 9,grow");
 		
 		btCadastrar = new JButton("Cadastrar");
 		btCadastrar.setBackground(new Color(95, 158, 160));

@@ -7,9 +7,11 @@ import java.awt.Dimension;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class CadastroProdutos extends JPanel {
 
@@ -20,6 +22,7 @@ public class CadastroProdutos extends JPanel {
 	private JButton btRemover;
 	private boolean modoExclusao = false;
 	private JButton btLogout;
+	private JLabel logo;
 
 	/**
 	 * Create the panel.
@@ -30,6 +33,21 @@ public class CadastroProdutos extends JPanel {
 		setLayout(new MigLayout("", "[][42.00,grow][grow][grow]", "[][grow][][][][][][][grow]"));
 		setPreferredSize(new Dimension(1020,640));
 		setMinimumSize(new Dimension(1020, 640));
+		
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(CadastroProdutos.class.getResource("/imagens/Semblante.png")));
+		add(logo, "cell 2 1,alignx center,aligny center");
+		
+		ImageIcon iconLogo = new ImageIcon(
+		        Login.class.getResource("/imagens/Semblante.png")
+		);
+
+		Image imgInterrogacao = iconLogo.getImage().getScaledInstance(
+		        230,
+		        230,
+		        Image.SCALE_SMOOTH
+		);
+		logo.setIcon(new ImageIcon(imgInterrogacao));
 		
 		JLabel lbGerenciarProdutos = new JLabel("Gerência de Produtos");
 		lbGerenciarProdutos.setFont(new Font("Times New Roman", Font.BOLD, 35));

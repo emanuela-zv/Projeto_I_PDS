@@ -108,7 +108,6 @@ public class CarrinhoController {
 
 	public void setLoginController(LoginController loginController) {
 		this.loginController = loginController;
-		this.carrinho.logout(e -> loginController.logout());
 	}
 
 	public void limparCarrinho() {

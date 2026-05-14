@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -16,6 +18,7 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 
 public class Login extends JPanel {
 
@@ -24,6 +27,7 @@ public class Login extends JPanel {
 	private JTextField tfCpf;
 	private JButton btEntrar;
 	private JButton btNaoTenhoConta;
+	private JLabel logo;
 
 	/**
 	 * Create the panel.
@@ -33,6 +37,21 @@ public class Login extends JPanel {
 		setLayout(new MigLayout("", "[30.00,grow][][350.00][30.00,grow]", "[30.00,grow][][][][][][][34.00][grow]"));
 		setPreferredSize(new Dimension(1020, 640));
 		setMinimumSize(new Dimension(1020, 640));
+		
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(Login.class.getResource("/imagens/Semblante.png")));
+		add(logo, "cell 1 0 2 1,alignx center");
+		
+		ImageIcon iconLogo = new ImageIcon(
+		        Login.class.getResource("/imagens/Semblante.png")
+		);
+
+		Image imgLogo= iconLogo.getImage().getScaledInstance(
+		        230,
+		        230,
+		        Image.SCALE_SMOOTH
+		);
+		logo.setIcon(new ImageIcon(imgLogo));
 
 		JLabel lbUsuario = new JLabel("Usuário");
 		lbUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 25));

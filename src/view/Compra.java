@@ -6,12 +6,14 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeListener;
@@ -30,6 +32,7 @@ public class Compra extends JPanel {
 	public JSpinner spinnerQuant;
 	private JLabel lbValorInsumo;
 	private JButton btLogout;
+	private JLabel logo;
 
 	public Compra() {
 
@@ -42,6 +45,20 @@ public class Compra extends JPanel {
 		btLogout.setForeground(Color.black);
 		btLogout.setBorderPainted(false);
 		add(btLogout, "cell 0 0");
+		
+		ImageIcon iconLogo = new ImageIcon(
+		        Login.class.getResource("/imagens/Semblante.png")
+		);
+
+		Image imgLogo= iconLogo.getImage().getScaledInstance(
+		        230,
+		        230,
+		        Image.SCALE_SMOOTH
+		);
+		
+		logo = new JLabel("");
+		add(logo, "cell 2 1 2 1,alignx center,aligny center");
+		logo.setIcon(new ImageIcon(imgLogo));
 		
 		JLabel lbInsumo = new JLabel("Escolha o produto");
 		lbInsumo.setFont(new Font("Times New Roman", Font.PLAIN, 25));

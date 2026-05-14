@@ -24,3 +24,19 @@ quantidade INT NOT NULL,
 codigoBarras BIGINT PRIMARY KEY NOT NULL
 
 );
+
+use supermercado;
+insert into insumos values 
+("Biscoito", "Isabela", "Bolinhos e docinhos", "Biscoito de maizena", 6.50, 20, 123456789), 
+("Macarrão", "Galo", "Amassas", "Macarrão espaguete", 12.50, 30, 987654321), 
+("Arroz", "Tio João", "DaFazzenda","Arroz branco", 10.00, 60, 876543219),
+("Feijão", "Kika", "DaFazzenda","Feijão preto", 6.99, 40, 765432189);
+
+
+insert into usuarios values
+("12345678900", "Camila Vitoria Tedesco", "camila", false),
+("98765432100", "Júlia C Otero Luiz", "julia", true),
+("00123456789", "Lara C de Souza", "lara", false),
+("00987654321", "Emanuela Z Vieira", "emanuela", true);
+
+select * from insumos;
