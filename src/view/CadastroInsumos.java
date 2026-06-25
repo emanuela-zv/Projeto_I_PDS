@@ -83,8 +83,13 @@ public class CadastroInsumos extends JPanel {
 		    @Override
 		    public void keyTyped(KeyEvent e) {
 		        char c = e.getKeyChar();
+		 
+		        if (!Character.isDigit(c)) {
+		            e.consume();
+		            return;
+		        }
 
-		        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+		        if (tfCodigoBarras.getText().length() >= 13) {
 		            e.consume();
 		        }
 		    }
@@ -94,7 +99,6 @@ public class CadastroInsumos extends JPanel {
 		lbQuantidade.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		add(lbQuantidade, "cell 1 7,alignx left");
 		
-
 		tfQuantidade = new JTextField();
 		tfQuantidade.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		tfQuantidade.setColumns(10);
@@ -125,18 +129,15 @@ public class CadastroInsumos extends JPanel {
 		    @Override
 		    public void keyTyped(KeyEvent e) {
 		        char c = e.getKeyChar();
-
-		        // impede segunda vírgula
+		     
 		        if (c == ',' && tfValor.getText().contains(",")) {
 		            e.consume();
 		        }
-
-		        // impede segundo ponto
+		        
 		        if (c == '.' && tfValor.getText().contains(".")) {
 		            e.consume();
 		        }
-
-		        // impede misturar vírgula e ponto
+		    
 		        if (c == ',' && tfValor.getText().contains(".")) {
 		            e.consume();
 		        }
@@ -165,6 +166,8 @@ public class CadastroInsumos extends JPanel {
 		btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		panel_1.add(btVoltar);
 		btVoltar.setBorderPainted(false);
+		btVoltar.setContentAreaFilled(false);
+		btVoltar.setFocusPainted(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(95, 158, 160));
@@ -175,6 +178,8 @@ public class CadastroInsumos extends JPanel {
 		btCadastrar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		panel.add(btCadastrar);
 		btCadastrar.setBorderPainted(false);
+		btCadastrar.setContentAreaFilled(false);
+		btCadastrar.setFocusPainted(false);
 
 	}
 	

@@ -39,7 +39,7 @@ public class Main {
 		InsumosDAO insumosDao = new InsumosDAO();
 
 		// Navegador
-		Navegador navegador = new Navegador(login, telaPrincipal, cadastroUsuario, cadastroProdutos, cadastroInsumos);
+		Navegador navegador = new Navegador(telaPrincipal);
 
 		//Controllers
 		
@@ -47,19 +47,22 @@ public class Main {
 		LoginController loginController = new LoginController(login, usuariosDao, navegador, telaPrincipal);
 		CompraController compraController = new CompraController(compra, carrinho, navegador, insumosDao, carrinhoController, loginController);
 
-		loginController.setCompraController(compraController);
-		loginController.setCarrinhoController(carrinhoController);
-		carrinhoController.setLoginController(loginController);
+
 
 		CadastroUsuarioController cadastroUsuarioController = new CadastroUsuarioController(cadastroUsuario, navegador,
 				usuariosDao);
-		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController(navegador,
-				cadastroInsumos, cadastroProdutos, produtos, loginController);
 		ProdutosController produtosController = new ProdutosController(produtos, insumosDao, navegador,
 				cadastroProdutos);
+		CadastroProdutosController cadastroProdutosController = new CadastroProdutosController(navegador,
+				cadastroInsumos, cadastroProdutos, produtos, loginController, produtosController );
 		CadastroInsumosController cadastroInsumosController = new CadastroInsumosController(cadastroInsumos, navegador,
 				insumosDao, produtos, produtosController);
-
+		loginController.setCompraController(compraController);
+		loginController.setCarrinhoController(carrinhoController);
+		carrinhoController.setLoginController(loginController);
+		carrinhoController.setCompraController(compraController);
+		carrinhoController.setProdutosController(produtosController);
+		
 		// Painéis
 
 		navegador.adicionarPainel("LOGIN", login);

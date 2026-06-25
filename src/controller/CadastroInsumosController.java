@@ -52,7 +52,7 @@ public class CadastroInsumosController {
 							cadastroInsumos.getTfDescricao().getText(),
 							Float.parseFloat(cadastroInsumos.getTfValor().getText().replace(",", ".")),
 							Integer.parseInt(cadastroInsumos.getTfQuantidade().getText()),
-							Integer.parseInt(cadastroInsumos.getTfCodigoBarras().getText()));
+							cadastroInsumos.getTfCodigoBarras().getText());
 
 					insumosDao.adicionarInsumo(novoInsumo);
 					JOptionPane.showMessageDialog(null, "Produto Cadastrado com sucesso!");

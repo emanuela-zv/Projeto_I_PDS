@@ -8,19 +8,21 @@ public class CadastroProdutosController {
 	
 	private Navegador navegador;
 	private CadastroInsumos cadastroInsumos;
+	private ProdutosController produtosController;
 	private CadastroProdutos cadastroProdutos;
 	private Produtos produtos;
 	private LoginController loginController;
 	
 	
 	public CadastroProdutosController(Navegador navegador, CadastroInsumos cadastroInsumos,
-			CadastroProdutos cadastroProdutos, Produtos produtos, LoginController loginController) {
+			CadastroProdutos cadastroProdutos, Produtos produtos, LoginController loginController, ProdutosController produtosController) {
 		super();
 		this.navegador = navegador;
 		this.cadastroInsumos = cadastroInsumos;
 		this.cadastroProdutos = cadastroProdutos;
 		this.produtos = produtos;
 		this.loginController = loginController;
+		this.produtosController = produtosController;
 		
 		this.cadastroProdutos.logout(e -> {
 			loginController.logout();			
@@ -29,6 +31,7 @@ public class CadastroProdutosController {
 		
 		this.cadastroProdutos.cadastrar( e -> {
 			this.navegador.navegar("CADASTRO_INSUMOS");
+			produtosController.carregarTabela();
 		});
 		
 		this.cadastroProdutos.visualizar(e -> {

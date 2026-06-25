@@ -24,7 +24,15 @@ public class CarrinhoController {
 	private Compra compra;
 	private Navegador navegador;
 	private LoginController loginController;
+	private CompraController compraController;
 	private List<Object[]> itensCarrinho = new ArrayList<>();
+	private List<String> codigosCarrinho = new ArrayList<>();
+	private ProdutosController produtosController;
+
+	public void setProdutosController(ProdutosController produtosController) {
+	    this.produtosController = produtosController;
+	}
+
 
 	public CarrinhoController(Carrinho carrinho, InsumosDAO insumosDao, Compra compra, Navegador navegador) {
 		super();
@@ -32,6 +40,7 @@ public class CarrinhoController {
 		this.insumosDao = insumosDao;
 		this.compra = compra;
 		this.navegador = navegador;
+
 
 		this.carrinho.logout(e -> {
 			if (loginController != null) {
@@ -65,7 +74,54 @@ public class CarrinhoController {
 		});
 
 		this.carrinho.finalizar(e -> {
-			JOptionPane.showMessageDialog(null, "Compra finalizada!");
+
+		    try {
+
+		        List<Insumos> estoque = insumosDao.listarInsumos();
+
+		        for (int i = 0; i < itensCarrinho.size(); i++) {
+
+		            String codigo = codigosCarrinho.get(i);
+
+		            int qtdComprada =
+		                    (int) itensCarrinho.get(i)[1];
+
+		            for (Insumos ins : estoque) {
+
+		                if (ins.getCodigoBarras().equals(codigo)) {
+
+		                    int novaQuantidade =
+		                            ins.getQuantidade()
+		                            - qtdComprada;
+
+		                    insumosDao.atualizarQuantidade(
+		                            codigo,
+		                            novaQuantidade
+		                    );
+
+		                    break;
+		                }
+		            }
+		        }
+
+		        JOptionPane.showMessageDialog(
+		                null,
+		                "Compra finalizada!"
+		        );
+
+		        itensCarrinho.clear();
+		        codigosCarrinho.clear();
+
+		        limparCarrinho();
+		        compraController.carregarProdutosDoEstoque();
+		        if (produtosController != null) {
+		            produtosController.carregarTabela();
+		        }
+
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		    }
+		    
 		});
 
 		this.carrinho.notaFiscal(e -> {
@@ -76,12 +132,13 @@ public class CarrinhoController {
 			try {
 
 				for (Object[] item : itensCarrinho) {
-					String nome = (String) item[0]; // Posição do Nome
-					double subtotal = (double) item[3]; // Posição do Valor
+					String nome = (String) item[0]; 
+					double subtotal = (double) item[3];
 
 					listaProdutos += "• " + nome + "\n";
 					total += subtotal;
 				}
+				
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, "Erro ao gerar nota fiscal.", "Erro", JOptionPane.ERROR_MESSAGE);
 				return;
@@ -116,14 +173,18 @@ public class CarrinhoController {
 		carrinho.setLbTotal("Total: R$ 0,00");
 	}
 
-	public void adicionarItem(String produto, int qtd, double valorUnitario) {
+	public void adicionarItem(
+	        String codigoBarras,
+	        String produto,
+	        int qtd,
+	        double valorUnitario) {
 
 		try {
 
 			double subtotal = qtd * valorUnitario;
 
 			Object[] linha = { produto, qtd, valorUnitario, subtotal };
-
+			codigosCarrinho.add(codigoBarras);
 			itensCarrinho.add(linha);
 
 			carrinho.adicionarLinha(linha);
@@ -163,6 +224,9 @@ public class CarrinhoController {
 
 	public void setUsuario(Usuarios usuarios) {
 		this.usuarios = usuarios;
+	}
+	public void setCompraController(CompraController compraController) {
+	    this.compraController = compraController;
 	}
 
 }

@@ -8,9 +8,9 @@ public class Insumos {
 	private int quantidade;
 	private String descricao;
 	private float valor;
-	private int codigoBarras;
+	private String codigoBarras;
 	
-	public Insumos(String nome, String marca, String fornecedora, String descricao,  float valor, int quantidade, int codigoBarras) {
+	public Insumos(String nome, String marca, String fornecedora, String descricao,  float valor, int quantidade, String codigoBarras) {
 		
 		super();
 		this.nome = nome;
@@ -64,11 +64,11 @@ public class Insumos {
 		this.valor = valor;
 	}
 
-	public int getCodigoBarras() {
+	public String getCodigoBarras() {
 		return codigoBarras;
 	}
 
-	public void setCodigoBarras(int codigoBarras) {
+	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
 		

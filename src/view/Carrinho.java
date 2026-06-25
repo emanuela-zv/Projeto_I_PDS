@@ -67,24 +67,32 @@ public class Carrinho extends JPanel {
 		btVoltar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btVoltar.setBackground(new Color(95, 158, 160));
 		btVoltar.setBorderPainted(false);
+		btVoltar.setContentAreaFilled(false);
+		btVoltar.setFocusPainted(false);
 		add(btVoltar, "cell 2 3");
 
 		btRemover = new JButton("Remover");
 		btRemover.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btRemover.setBackground(new Color(95, 158, 160));
 		btRemover.setBorderPainted(false);
+		btRemover.setContentAreaFilled(false);
+		btRemover.setFocusPainted(false);
 		add(btRemover, "cell 3 3");
 
 		btFinalizarCompra = new JButton("Finalizar Compra");
 		btFinalizarCompra.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btFinalizarCompra.setBackground(new Color(95, 158, 160));
 		btFinalizarCompra.setBorderPainted(false);
+		btFinalizarCompra.setContentAreaFilled(false);
+		btFinalizarCompra.setFocusPainted(false);
 		add(btFinalizarCompra, "cell 4 3");
 
 		btNota = new JButton("Emitir nota fiscal");
 		btNota.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btNota.setBackground(new Color(95, 158, 160));
 		btNota.setBorderPainted(false);
+		btNota.setContentAreaFilled(false);
+		btNota.setFocusPainted(false);
 		add(btNota, "cell 5 3");
 
 		btLogout = new JButton("Sair");
@@ -92,6 +100,8 @@ public class Carrinho extends JPanel {
 		btLogout.setBackground(new Color(95, 158, 160));
 		btLogout.setForeground(Color.black);
 		btLogout.setBorderPainted(false);
+		btLogout.setContentAreaFilled(false);
+		btLogout.setFocusPainted(false);
 		add(btLogout, "cell 0 0");
 
 		lbTotal = new JLabel("Total: R$ 0,00");

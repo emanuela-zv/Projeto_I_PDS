@@ -10,22 +10,12 @@ import view.TelaPrincipal;
 
 public class Navegador {
 
-	// this.Login = login
-	
 	private Login login;
-	private CadastroUsuario cadastroUsuario;
 	private TelaPrincipal telaPrincipal;
-	private CadastroProdutos cadastroProdutos;
-	private CadastroInsumos cadastroInsumos;
+
 	
-	public Navegador(Login login, TelaPrincipal telaPrincipal, CadastroUsuario cadastroUsuario,
-			CadastroProdutos cadastroProdutos, CadastroInsumos cadastroInsumos) {
-		super();
-		this.login = login;
+	public Navegador( TelaPrincipal telaPrincipal) {
 		this.telaPrincipal = telaPrincipal;
-		this.cadastroUsuario = cadastroUsuario;
-		this.cadastroProdutos = cadastroProdutos;
-		this.cadastroInsumos = cadastroInsumos;
 		
 	}
 
@@ -36,8 +26,28 @@ public class Navegador {
 	
 	public void navegar(String nome) {
 		this.telaPrincipal.mostrarTela(nome);
+		this.telaPrincipal.setTitle(getTitulo(nome));
 	}
 	
-	//fazer os métodos adicionar tela e mostrar na tela principal.
+	private String getTitulo(String nome) {
+	    switch (nome) {
+	    case "LOGIN":
+	        return "Login";
+	    case "CADASTRO_INSUMOS":
+	    	return "Cadastre o produto";
+	    case "CADASTRO_PRODUTOS":
+	    	return "Administre os produtos";
+	    case "CADASTRO_USUARIO":
+	    	return "Cadastre-se";
+	    case "COMPRA":
+	    	return "Faça sua compra";
+	    case "PRODUTOS":
+	    	return "Adminstre os produtos";
+	    case "CARRINHO":
+	    	return "Verifique seu carrinho e conclua a compra";
+	    default:
+	        return "";
+	    }
+	}	
 	
 }

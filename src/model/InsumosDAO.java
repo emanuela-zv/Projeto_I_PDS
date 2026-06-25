@@ -20,7 +20,7 @@ public class InsumosDAO {
 			pstm.setString(4, insumo.getDescricao());
 			pstm.setFloat(5, insumo.getValor());
 			pstm.setInt(6, insumo.getQuantidade());
-			pstm.setInt(7, insumo.getCodigoBarras());
+			pstm.setString(7, insumo.getCodigoBarras());
 
 			pstm.executeUpdate();
 
@@ -43,7 +43,7 @@ public class InsumosDAO {
 
 						rset.getString("nome"), rset.getString("marca"), rset.getString("fornecedora"),
 						rset.getString("descricao"), rset.getFloat("valor"), rset.getInt("quantidade"),
-						rset.getInt("codigoBarras")
+						rset.getString("codigoBarras")
 
 				);
 
@@ -57,35 +57,40 @@ public class InsumosDAO {
 		return lista;
 	}
 
-	public void atualizar(Insumos insumo) {
+	public void atualizar(Insumos insumo, String codigoAntigo) {
 
-		String sql = "UPDATE insumos SET nome=?, marca=?, fornecedora=?, quantidade=?, valor=?, descricao=? WHERE codigoBarras=?";
+	    String sql =
+	        "UPDATE insumos " +
+	        "SET nome=?, marca=?, fornecedora=?, quantidade=?, valor=?, descricao=?, codigoBarras=? " +
+	        "WHERE codigoBarras=?";
 
-		try (Connection conexao = BancoDeDados.conectar(); PreparedStatement pstm = conexao.prepareStatement(sql)) {
+	    try (Connection conexao = BancoDeDados.conectar();
+	         PreparedStatement pstm = conexao.prepareStatement(sql)) {
 
-			pstm.setString(1, insumo.getNome());
-			pstm.setString(2, insumo.getMarca());
-			pstm.setString(3, insumo.getFornecedora());
-			pstm.setInt(4, insumo.getQuantidade());
-			pstm.setDouble(5, insumo.getValor());
-			pstm.setString(6, insumo.getDescricao());
-			pstm.setInt(7, insumo.getCodigoBarras());
+	        pstm.setString(1, insumo.getNome());
+	        pstm.setString(2, insumo.getMarca());
+	        pstm.setString(3, insumo.getFornecedora());
+	        pstm.setInt(4, insumo.getQuantidade());
+	        pstm.setDouble(5, insumo.getValor());
+	        pstm.setString(6, insumo.getDescricao());
+	        pstm.setString(7, insumo.getCodigoBarras());
+	        pstm.setString(8, codigoAntigo);
 
-			pstm.executeUpdate();
+	        pstm.executeUpdate();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 	
-	public void atualizarQuantidade(int codigoBarras, int novaQuantidade) {
+	public void atualizarQuantidade(String codigoBarras, int novaQuantidade) {
 	    String sql = "UPDATE insumos SET quantidade = ? WHERE codigoBarras = ?";
 
 	    try (Connection conexao = BancoDeDados.conectar();
 	         PreparedStatement pstm = conexao.prepareStatement(sql)) {
 
 	        pstm.setInt(1, novaQuantidade);
-	        pstm.setInt(2, codigoBarras);
+	        pstm.setString(2, codigoBarras);
 	        pstm.executeUpdate();
 
 	    } catch (SQLException e) {
@@ -93,13 +98,13 @@ public class InsumosDAO {
 	    }
 	}
 
-	public void remover(int codigoBarras) {
+	public void remover(String codigoBarras) {
 
 		String sql = "DELETE FROM insumos WHERE codigoBarras = ?";
 
 		try (Connection conexao = BancoDeDados.conectar(); PreparedStatement pstm = conexao.prepareStatement(sql)) {
 
-			pstm.setInt(1, codigoBarras);
+			pstm.setString(1, codigoBarras);
 			pstm.executeUpdate();
 
 		} catch (SQLException e) {

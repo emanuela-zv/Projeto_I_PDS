@@ -96,10 +96,28 @@ public class Login extends JPanel {
 
 		btNaoTenhoConta = new JButton("Não tenho conta");
 
-		btNaoTenhoConta.setForeground(new Color(178, 34, 34));
+		Color corOriginal = new Color(178, 34, 34);
+		Color corDiferente = new Color(95, 158, 160);
+
+		btNaoTenhoConta.setForeground(corOriginal);
 		btNaoTenhoConta.setBackground(new Color(255, 255, 224));
 		btNaoTenhoConta.setFont(new Font("Times New Roman", Font.PLAIN, 25));
 		btNaoTenhoConta.setBorderPainted(false);
+		btNaoTenhoConta.setContentAreaFilled(false);
+		btNaoTenhoConta.setFocusPainted(false);
+
+		btNaoTenhoConta.addMouseListener(new java.awt.event.MouseAdapter() {
+		    @Override
+		    public void mouseEntered(java.awt.event.MouseEvent e) {
+		        btNaoTenhoConta.setForeground(corDiferente);
+		    }
+
+		    @Override
+		    public void mouseExited(java.awt.event.MouseEvent e) {
+		        btNaoTenhoConta.setForeground(corOriginal);
+		    }
+		});
+
 		panel_3.add(btNaoTenhoConta);
 
 		JPanel panel = new JPanel();
@@ -112,6 +130,8 @@ public class Login extends JPanel {
 		btEntrar.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		panel.add(btEntrar);
 		btEntrar.setBorderPainted(false);
+		btEntrar.setContentAreaFilled(false);
+		btEntrar.setFocusPainted(false);
 		;
 
 	}

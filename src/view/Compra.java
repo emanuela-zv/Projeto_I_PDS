@@ -44,6 +44,8 @@ public class Compra extends JPanel {
 		btLogout.setBackground(new Color(95, 158, 160));  
 		btLogout.setForeground(Color.black);
 		btLogout.setBorderPainted(false);
+		btLogout.setContentAreaFilled(false);
+		btLogout.setFocusPainted(false);
 		add(btLogout, "cell 0 0");
 		
 		ImageIcon iconLogo = new ImageIcon(

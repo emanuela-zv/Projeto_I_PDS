@@ -57,6 +57,7 @@ public class CompraController {
 		    if (selecionado == null) { return;}
 
 		    carrinhoController.adicionarItem(
+		            selecionado.getCodigoBarras(),
 		            selecionado.getNome(),
 		            qtd,
 		            selecionado.getValor()
@@ -64,11 +65,6 @@ public class CompraController {
 		    
 		    int novaQuantidade = selecionado.getQuantidade() - qtd;
 		    selecionado.setQuantidade(novaQuantidade);
-
-		    // Atualiza no banco
-		    insumosDao.atualizarQuantidade(selecionado.getCodigoBarras(), novaQuantidade);
-
-		    // Atualiza limite do spinner
 		    compra.configurarLimiteEstoque(novaQuantidade);
 		    		    
 		    compra.getCbInsumos().setSelectedIndex(0);
@@ -79,7 +75,7 @@ public class CompraController {
 		    JOptionPane.showMessageDialog(compra, "Adicionado ao carrinho!");
 		    
 		    selecionado.setQuantidade(novaQuantidade);
-		    carregarProdutosDoEstoque();
+
 		    
 		    } catch (Exception ex) {
 
@@ -140,4 +136,5 @@ public class CompraController {
 			JOptionPane.showMessageDialog(null, mensagem, "Detalhes do produto", 1);
 		}
 	}
+	
 }
